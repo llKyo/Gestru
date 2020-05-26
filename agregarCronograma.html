@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">Inicio</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="cronograma.html">Cronograma</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Obras</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Trabajadores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="#">Actividades</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="main-section">
+        <div class="background-overlay py-4  text-white">
+            <div class="row ">
+                <div class="col-md-5     mx-auto">
+                    <div class="card">
+                        <div class="card-header bg-dark">
+                            <h3>Gestión de Cronogramas</h3>
+                        </div>
+                        <div class="card-body bg-secondary">
+                            <div class="form-group">
+                                <label for="nombreTxt">Nombre</label>
+                                <input type="text" class="form-control " id="nombreTxt">
+                            </div>
+                            <div class="form-group">
+                                <label for="inicioTxt">Fecha de Inicio</label>
+                                <input type="text" class="form-control " id="inicioTxt">
+                            </div>
+                            <div class="form-group">
+                                <label for="finTxt">Fecha de Término</label>
+                                <input type="text" class="form-control " id="finTxt">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-warning form-control" id="addCronBtn"    >Agregar </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    <footer class="main-footer bg-dark font-weight-bold py-2 text-white ">
+        <div class="row">
+            <div class="col-md-6">
+                <nav id="principal" class="menu">
+                    <ul>
+                        <li> <a class="enlace" href="#">
+                                <h4>Soporte</h4>
+                            </a></li>
+                        <li> <a class="enlace" href="#">
+                                <h4>Contáctanos</h4>
+                            </a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col">
+                <nav id="secundaria" class="menu">
+                    <ul>
+                        <li><a class="enlace" href="#">
+                                <h4>Acerca de Nosotros</h4>
+                            </a></li>
+                        <li>
+                            <h5>versión 0.2</h5>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
