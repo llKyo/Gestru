@@ -2,9 +2,9 @@
 
 ## Requisitos
 
-Para utilizar este proyecto se necesita una cuenta en [Google Firebase](https://firebase.google.com/) y generar un archivo app.js basándose en el app.js.example para completarlo
+Para utilizar este proyecto se necesita una cuenta en [Google Firebase](https://firebase.google.com/) y generar un archivo firebaseConfig.js basándose en el firebaseConfig.js.example para completarlo
 
-### app.js.example ⬇
+### firebaseConfig.js.example ⬇
 ```javascript
 const firebaseConfig = {
     apiKey: "",
