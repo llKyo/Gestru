@@ -1,7 +1,7 @@
 
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+//firebase.initializeApp(firebaseConfig);
+//const db = firebase.firestore();
 
 function agregarObra() {
 
