@@ -1,7 +1,9 @@
-
-//firebase.initializeApp(firebaseConfig);
-//const db = firebase.firestore();
-
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
 //cargar selects 
 
 
@@ -27,7 +29,10 @@ function agregarActividad() {
     })
         .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
-            alert("Actividad Agregada Correctamente");
+            Toast.fire({
+                icon: 'success',
+                title: 'Actividad agregada correctamente'
+            });
             document.querySelector('#nombreTxt').value = '';
             document.querySelector('#inicioTxt').value = '';
             document.querySelector('#finTxt').value = '';
@@ -49,8 +54,10 @@ db.collection("actividades").onSnapshot((querySnapshot) => {
         <td>${doc.data().fechaTermmino}</td>
         <td>${doc.data().cronograma}</td>
         <td>${doc.data().trabajador}</td>
-        <td><button class="btn btn-danger" onclick=eliminar('${id}')>Eliminar</button></td>
-        <td><button class="btn btn-warning" > Editar</button></td>
+        <td class="project-actions text-center">
+        <a class="btn btn-info btn-md" href="#"><i class="fas fa-pencil-alt"></i>Editar</a>
+        <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
+        </td>
         </tr>`
     });
 });
@@ -58,6 +65,10 @@ db.collection("actividades").onSnapshot((querySnapshot) => {
 //Borrar Acitivdad
 function eliminar(id) {
     db.collection("actividades").doc(id).delete().then(function () {
+        Toast.fire({
+            icon: 'warning',
+            title: 'Documento borrado correctamente(actividad)'
+        });
         console.log("Documento borrado Correctamente(actividad)");
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);

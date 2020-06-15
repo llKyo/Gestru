@@ -1,15 +1,17 @@
-
-
-//firebase.initializeApp(firebaseConfig);
-//const db = firebase.firestore();
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
 
 function agregarObra() {
 
     const nombre = document.querySelector('#nombreTxt').value;
-    if($('#nombreTxt').val().length == 0){
+    if ($('#nombreTxt').val().length == 0) {
         alert('Debe ingresar un nombre a la obra');
-         return false;
-      }
+        return false;
+    }
     const inicio = document.querySelector('#fechaInicioTxt').value;
     const fin = document.querySelector('#fechaInicioTxt').value;
 
@@ -20,7 +22,10 @@ function agregarObra() {
     })
         .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
-            alert("Actividad Agregada Correctamente");
+            Toast.fire({
+                icon: 'success',
+                title: 'Actividad agregada correctamente.'
+            });
             document.querySelector('#nombreTxt').value = '';
             document.querySelector('#fechaInicioTxt').value = '';
             document.querySelector('#fechaInicioTxt').value = '';
@@ -33,16 +38,18 @@ function agregarObra() {
 //Mostrar Obras
 const table = document.querySelector('#tableObras');
 db.collection("obras").onSnapshot((querySnapshot) => {
-    table.innerHTML =  ``;
+    table.innerHTML = ``;
     querySnapshot.forEach((doc) => {
         const id = doc.id;
-        table.innerHTML +=`
+        table.innerHTML += `
         <tr>
         <td>${doc.data().nombre}</td>
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
-        <td><button class="btn btn-danger" onclick=eliminar('${id}')>Eliminar</button></td>
-        <td><button class="btn btn-warning" > Editar</button></td>
+        <td class="project-actions text-center">
+        <a class="btn btn-info btn-md" href="#"><i class="fas fa-pencil-alt"></i>Editar</a>
+        <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
+        </td>
         </tr>`
 
     })
@@ -51,7 +58,10 @@ db.collection("obras").onSnapshot((querySnapshot) => {
 
 function eliminar(id) {
     db.collection("obras").doc(id).delete().then(function () {
-        console.log("Documento borrado Correctamente(actividad)");
+        Toast.fire({
+            icon: 'warning',
+            title: 'Documento borrado correctgmente(actividad)'
+        });
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
