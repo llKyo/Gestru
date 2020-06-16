@@ -47,7 +47,7 @@ db.collection("obras").onSnapshot((querySnapshot) => {
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
         <td class="project-actions text-center">
-        <a class="btn btn-info btn-md" href="#"><i class="fas fa-pencil-alt"></i>Editar</a>
+        <a class="btn btn-info btn-md" href="#"><i class="fas fa-pencil-alt" onclick=editarObra('${id}')></i>Editar</a>
         <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
         </td>
         </tr>`
@@ -66,3 +66,50 @@ function eliminar(id) {
         console.error("Error elimiando el objeto :", error);
     });
 }
+
+
+
+function editarObra(id){
+
+    let nombre = document.querySelector('#nombreEdit').value;
+    let fechaInicio = document.querySelector('#fechaInicioEdit').value;
+    let fechaFin = document.querySelector('#fechaFinEdit').value;
+
+
+    db.collection("obras").doc(id).set({
+        nombre: nombre,
+        fechaInicio: fechaInicio,
+        fechaTermmino: fechaFin
+      }, function(error) {
+        if (error) {
+          // The write failed...
+        } else {
+          // Data saved successfully!
+          alert('Registro actualizado.');
+        }
+      });
+
+}
+    
+
+    /*db.collection("obras").onSnapshot((querySnapshot) => {
+    
+        querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            if (id == ide){
+                nombre1 = doc.data().nombre;
+                fechaInicio1 = doc.data().fechaInicio;
+                fechaFin1 = doc.data().fechaTermmino;
+                break;
+            }
+    
+        })
+        console.log(nombre1, fechaInicio1, fechaFin1);
+    });
+
+    
+    
+}*/
+
+
+
