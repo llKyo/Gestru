@@ -43,7 +43,7 @@
                     <thead>
                         <tr>
                             <th>
-                                Fase
+                                Obra
                             </th>
                             <th>
                                 Fecha Inicio

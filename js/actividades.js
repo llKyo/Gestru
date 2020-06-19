@@ -1,3 +1,5 @@
+let idActividad;
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -55,7 +57,7 @@ db.collection("actividades").onSnapshot((querySnapshot) => {
         <td>${doc.data().cronograma}</td>
         <td>${doc.data().trabajador}</td>
         <td class="project-actions text-center">
-        <a class="btn btn-info btn-md" href="#"><i class="fas fa-pencil-alt"></i>Editar</a>
+        <a class="btn btn-info btn-md" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
         <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
         </td>
         </tr>`
@@ -67,11 +69,93 @@ function eliminar(id) {
     db.collection("actividades").doc(id).delete().then(function () {
         Toast.fire({
             icon: 'warning',
-            title: 'Documento borrado correctamente(actividad)'
+            title: 'Documento borrado correctamente.'
         });
-        console.log("Documento borrado Correctamente(actividad)");
+        console.log("Documento borrado Correctamente.");
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
+}
+
+function cargarSelect(){
+    let select = document.querySelector("#cronogramaSelect");
+    db.collection("cronogramas").onSnapshot((querySnapshot) => {
+        select.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            select.innerHTML += `
+            <option>${doc.data().nombre}</option>
+            `
+        })
+
+    });
+}
+
+function actualizarModal(id){
+    idActividad = id;
+ 
+    db.collection("actividades").onSnapshot((querySnapshot) => {
+    
+        querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            if (idActividad == id){
+                document.querySelector("#nombreEdit").value = doc.data().nombre;
+                document.querySelector("#inicioEdit").value = doc.data().fechaInicio;
+                document.querySelector("#finEdit").value = doc.data().fechaTermmino;
+            }
+    
+        })
+    });
+
+    let select = document.querySelector("#cronogramaSelectEdit");
+    db.collection("cronogramas").onSnapshot((querySnapshot) => {
+        select.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            select.innerHTML += `
+            <option>${doc.data().nombre}</option>
+            `
+        })
+
+    });
+}
+
+function actualizarActividad(){
+
+    let id = idActividad;
+    let nombre = document.querySelector('#nombreEdit').value;
+    let fechaInicio = document.querySelector('#inicioEdit').value;
+    let fechaFin = document.querySelector('#finEdit').value;
+    let fase = document.querySelector("#cronogramaSelectEdit").value;
+    let trabajador = document.querySelector("#trabajadorSelectEdit").value;
+
+    let flag = true;
+
+    if (nombre.trim("")== ""){
+        flag = false;
+        Toast.fire({
+            icon: 'warning',
+            title: 'Ingrese nombre de la fase.'
+        });
+    }
+
+    if (flag){
+        db.collection("actividades").doc(id).set({
+            nombre: nombre,
+            fechaInicio: fechaInicio,
+            fechaTermmino: fechaFin,
+            cronograma: fase,
+            trabajador: trabajador
+          }, function(error) {
+            if (error) {
+              // The write failed...
+            } else {
+              // Data saved successfully!
+            }
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Registro actualizado correctamente.'
+        });
+    }
+    
 }
 

@@ -78,7 +78,7 @@ function actualizarModal(id){
     
         querySnapshot.forEach((doc) => {
             const id = doc.id;
-            if (id == id){
+            if (idObra == id){
                 document.querySelector("#nombreEdit").value = doc.data().nombre;
                 document.querySelector("#fechaInicioEdit").value = doc.data().fechaInicio;
                 document.querySelector("#fechaFinEdit").value = doc.data().fechaTermmino;

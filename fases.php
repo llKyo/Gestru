@@ -44,7 +44,7 @@
                     <thead>
                         <tr>
                             <th style="width: 15%">
-                                Nombre
+                                Fase
                             </th>
                             <th style="width: 10%">
                                 Fecha Inicio
@@ -141,6 +141,69 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+    <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Actualizar Fase</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="nombreTxt">Nombre</label>
+                                <input type="text" class="form-control " id="nombreEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 ml-auto">
+                            <div class="form-group">
+                                <label for="inicioTxt">Fecha de Inicio</label>
+                                <input type="date" class="form-control " id="inicioEdit">
+                            </div>
+                        </div>
+                        <div class="col-md-3 mr-auto">
+                            <div class="form-group">
+                                <label for="finTxt">Fecha de Término</label>
+                                <input type="date" class="form-control " id="finEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 ml-auto">
+                            <div class="form-group">
+                                <label for="selectEstado">Estado</label>
+                                <select id="selectEstadoModal" disabled class="form-control">
+                                    <option value="creado">Creado</option>
+                                    <option value="en ejecucion" checked>En proceso</option>
+                                    <option value="finalizado">Finalizado</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mr-auto ">
+                            <div class="form-group">
+                                <label for="selectObra">Obra asociada</label>
+                                <select id="selectObraModal" class="form-control"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                        onclick="editarFase()" id="agregarCronogramaBtn">Crear</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 </div>
 <!-- /.content-wrapper -->
 

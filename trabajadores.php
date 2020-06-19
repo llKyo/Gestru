@@ -47,7 +47,10 @@
                                 Nombre
                             </th>
                             <th>
-                                Apellido
+                                Rut
+                            </th>
+                            <th>
+                                Email
                             </th>
                             <th>
                                 Contacto
@@ -76,7 +79,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Crear nueva fase</h4>
+                    <h4 class="modal-title">Ingresar nuevo trabajador</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -86,23 +89,31 @@
                         <div class="col-md-6 mx-auto">
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
-                                <input type="text" class="form-control " id="nombreTxt">
+                                <input type="text" class="form-control " id="nombreTxt" placeholder="Ingrese nombre del trabajador">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mx-auto">
                             <div class="form-group">
-                                <label for="apellidoTxt">Apellido</label>
-                                <input type="text" class="form-control " id="apellidoTxt">
+                                <label for="apellidoTxt">Rut</label>
+                                <input type="text" class="form-control " id="rutTxt" placeholder="Ingrese rut del trabajador">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mx-auto">
                             <div class="form-group">
-                                <label for="contactoTxt">Conctacto</label>
-                                <input type="text" class="form-control " id="contactoTxt">
+                                <label for="contactoTxt">Email</label>
+                                <input type="text" class="form-control " id="emailTxt" placeholder="Ingrese email del trabajador">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="contactoTxt">Contacto</label>
+                                <input type="text" class="form-control " id="contactoTxt" placeholder="Ingrese contacto del trabajador">
                             </div>
                         </div>
                     </div>
@@ -127,6 +138,68 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+    <div class="modal fade" id="modal-edit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Actualizar datos de trabajador</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="nombreTxt">Nombre</label>
+                                <input type="text" class="form-control " id="nombreEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="apellidoTxt">Rut</label>
+                                <input type="text" class="form-control " id="rutEdit" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="contactoTxt">Email</label>
+                                <input type="text" class="form-control " id="emailEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="contactoTxt">Contacto</label>
+                                <input type="text" class="form-control " id="contactoEdit">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="rolTxt">Rol</label>
+                                <input type="text" id="rolEdit" required class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                        onclick="actualizarTrabajador()" id="registrarTrabajadorBtn">Actualizar</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
 
 </div>
 <!-- /.content-wrapper -->

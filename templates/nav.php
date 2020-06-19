@@ -152,7 +152,7 @@
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
                 Fases
-                <span class="right badge badge-success">New</span>
+                <span class="right badge badge-success"></span>
               </p>
             </a>
           </li>

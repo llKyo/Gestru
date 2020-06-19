@@ -1,3 +1,5 @@
+let idFase;
+
 const Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -101,8 +103,87 @@ db.collection("cronogramas").onSnapshot((querySnapshot) => {
     });
 });
 
-//Editar
+function actualizarModal(id){
+    idFase = id;
+ 
+    db.collection("cronogramas").onSnapshot((querySnapshot) => {
+    
+        querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            if (idFase == id){
+                document.querySelector("#nombreEdit").value = doc.data().nombre;
+                document.querySelector("#inicioEdit").value = doc.data().fechaInicio;
+                document.querySelector("#finEdit").value = doc.data().fechaTermmino;
+            }
+    
+        })
+    });
 
+    const selectFase = document.querySelector("#selectObraModal");
+    db.collection("obras").onSnapshot((querySnapshot) => {
+        selectFase.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            //const nombre = doc.nombreObra;
+            selectFase.innerHTML += `
+            <option>${doc.data().nombre}</option>
+            `
+        })
+
+    });
+}
+
+function editarFase(){
+
+    let id = idFase;
+    let nombre = document.querySelector('#nombreEdit').value;
+    let fechaInicio = document.querySelector('#inicioEdit').value;
+    let fechaFin = document.querySelector('#finEdit').value;
+    let estado = document.querySelector("#selectEstadoModal").value;
+    let obra = document.querySelector("#selectObraModal").value;
+
+    let flag = true;
+
+    if (nombre.trim("")== ""){
+        flag = false;
+        Toast.fire({
+            icon: 'warning',
+            title: 'Ingrese nombre de la fase.'
+        });
+    }
+
+    if (flag){
+        db.collection("cronogramas").doc(id).set({
+            nombre: nombre,
+            fechaInicio: fechaInicio,
+            fechaTermmino: fechaFin,
+            estado: estado,
+            obra: obra
+          }, function(error) {
+            if (error) {
+              // The write failed...
+            } else {
+              // Data saved successfully!
+            }
+          });
+          Toast.fire({
+            icon: 'success',
+            title: 'Registro actualizado correctamente.'
+        });
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+//Editar
+/*
 function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
     console.log("Entrando a funcion editar")
     document.querySelector("#nombreTxt").value = nombre;
@@ -165,4 +246,4 @@ function eliminar(id) {
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
-}
+}*/
