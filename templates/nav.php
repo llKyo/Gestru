@@ -161,7 +161,7 @@
               <i class="nav-icon fas fa-tools"></i>
               <p>
                 Obras
-                <span class="right badge badge-success">5</span>
+                <span class="right badge badge-success"></span>
               </p>
             </a>
           </li>
@@ -179,7 +179,7 @@
               <i class="nav-icon fas fa-clipboard-check"></i>
               <p>
                 Actividades
-                <span class="right badge badge-success">+</span>
+                <span class="right badge badge-success"></span>
               </p>
             </a>
           </li>
@@ -188,7 +188,7 @@
               <i class="nav-icon fas fa-clipboard-check"></i>
               <p>
                 Avances
-                <span class="right badge badge-success">+</span>
+                <span class="right badge badge-success"></span>
               </p>
             </a>
           </li>

@@ -114,10 +114,10 @@
                         <div class="col-md-3 ml-auto">
                             <div class="form-group">
                                 <label for="selectEstado">Estado</label>
-                                <select id="selectEstado" disabled class="form-control">
-                                    <option value="creado" cheked>Creado</option>
-                                    <option value="en ejecucion">En Ejecución</option>
-                                    <option value="finalizado">Finalizado</option>
+                                <select id="selectEstado" class="form-control">
+                                    <option value="Creado" cheked>Creado</option>
+                                    <option value="En ejecucion">En ejecución</option>
+                                    <option value="Finalizado">Finalizado</option>
                                 </select>
                             </div>
                         </div>
@@ -178,10 +178,10 @@
                         <div class="col-md-3 ml-auto">
                             <div class="form-group">
                                 <label for="selectEstado">Estado</label>
-                                <select id="selectEstadoModal" disabled class="form-control">
-                                    <option value="creado">Creado</option>
-                                    <option value="en ejecucion" checked>En proceso</option>
-                                    <option value="finalizado">Finalizado</option>
+                                <select id="selectEstadoModal" class="form-control">
+                                    <option value="Creado">Creado</option>
+                                    <option value="En ejecución" checked>En ejecución</option>
+                                    <option value="Finalizado">Finalizado</option>
                                 </select>
                             </div>
                         </div>
@@ -197,7 +197,7 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
-                        onclick="editarFase()" id="agregarCronogramaBtn">Crear</button>
+                        onclick="editarFase()" id="editarCronogramaBtn">Actualizar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
