@@ -28,8 +28,8 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title"><button class="btn btn-success" data-toggle="modal"
-                        data-target="#modal-lg">+ Nueva Fase</button></h2>
+                <h2 class="card-title"><button class="btn btn-success" data-toggle="modal" data-target="#modal-lg"
+                        onclick="limpiarModalAgregar()">+ Nueva Fase</button></h2>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -93,6 +93,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreTxt">
+                                <div class="invalid-feedback">Debe ingresar un nombre</div>
                             </div>
                         </div>
                     </div>
@@ -101,12 +102,14 @@
                             <div class="form-group">
                                 <label for="inicioTxt">Fecha de Inicio</label>
                                 <input type="date" class="form-control " id="inicioTxt">
+                                <div class="invalid-feedback" id="inicio-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-3 mr-auto">
                             <div class="form-group">
                                 <label for="finTxt">Fecha de Término</label>
                                 <input type="date" class="form-control " id="finTxt">
+                                <div class="invalid-feedback" id="fin-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -132,8 +135,8 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
-                        onclick="agregarCronograma()" id="agregarCronogramaBtn">Crear</button>
+                    <button type="button" class="btn btn-success swalDefaultSuccess" onclick="agregarCronograma()"
+                        id="agregarCronogramaBtn">Crear</button>
                 </div>
             </div>
             <!-- /.modal-content -->

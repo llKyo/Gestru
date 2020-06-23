@@ -51,6 +51,9 @@
                             <th>
                                 Fecha Termino
                             </th>
+                            <th style="width: 8%" class="text-center">
+                                Estado
+                            </th>
                             <th style="width: 40%">
                             </th>
                         </tr>

@@ -24,34 +24,77 @@ function cargarSelectObra() {
     })
 }
 
+function limpiarModalAgregar(){
+    const nombre      = document.querySelector('#nombreTxt');
+    const inicio      = document.querySelector("#inicioTxt");
+    const fin         = document.querySelector('#finTxt');
+
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+    nombre.value = "";
+    inicio.value = "";
+    fin.value    = "";
+}
+
 
 //AGREGAR CRONOGRAMA
 function agregarCronograma() {
-    let nombre = document.querySelector('#nombreTxt').value.trim();
-    if ($('#nombreTxt').val().length == 0) {
-        alert('Debe ingresar un nombre');
+    const nombre = document.querySelector('#nombreTxt');
+    const inicio = document.querySelector("#inicioTxt");
+    const fin    = document.querySelector('#finTxt');
+    const estado = document.querySelector("#selectEstado").value;
+    const obra   = document.querySelector("#selectObra").value;
+    let inicioFB = document.querySelector("#inicio-feedback");
+    let finFB    = document.querySelector("#fin-feedback");
+
+
+    // -------------- VALIDACIONES --------------
+    
+    inicioFB.innerText = "";
+    finFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+
+    let error = false;
+
+    if (nombre.value.length == 0) {
+        nombre.classList.add('is-invalid');
+        error = true;
+    }
+
+    if (inicio.value == "") {
+        error = true;
+        inicio.classList.add('is-invalid');
+        inicioFB.innerText += "Debe ingresar una fecha de inicio";
+    }
+    if (fin.value == "") {
+        error = true;
+        fin.classList.add('is-invalid');
+        finFB.innerText = "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (inicio.value > fin.value ){
+        error = true;
+        inicio.classList.add('is-invalid');
+        fin.classList.add('is-invalid');
+        inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (error) {
         return false;
     }
-    /*  const inicio = document.querySelector('#inicioTxt').value; */
 
-    let inicio = document.querySelector("#inicioTxt").value;
-    if (inicio == "") {
-        alert("debe ingresar un inicio");
-        return false
-    }
-    let fin = document.querySelector('#finTxt').value;
-    if (fin == "") {
-        alert("debe ingresar un fin");
-        return false
-    }
+    // -------------- FIN VALIDACIONES --------------
 
-    let estado = document.querySelector("#selectEstado").value;
 
-    let obra = document.querySelector("#selectObra").value;
     db.collection("cronogramas").add({
-        nombre: nombre,
-        fechaInicio: inicio,
-        fechaTermmino: fin,
+        nombre: nombre.value.trim(),
+        fechaInicio: inicio.value,
+        fechaTermmino: fin.value,
         estado: estado,
         obra: obra
     })
@@ -68,6 +111,9 @@ function agregarCronograma() {
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
+
+    //Cerrar Modal
+    $('#modal-lg').modal('hide');
 }
 //leer de Fase
 const progreso = 0;
@@ -174,16 +220,6 @@ function editarFase(){
 }
 
 
-
-
-
-
-
-
-
-
-//Editar
-/*
 function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
     console.log("Entrando a funcion editar")
     document.querySelector("#nombreTxt").value = nombre;
@@ -246,4 +282,4 @@ function eliminar(id) {
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
-}*/
+}
