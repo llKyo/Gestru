@@ -27,8 +27,8 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title"><button class="btn btn-success" data-toggle="modal" data-target="#modal-lg">+
-                        Nueva Obra</button></h2>
+                <h2 class="card-title"><button class="btn btn-success" data-toggle="modal" data-target="#modal-lg" 
+                    onclick="limpiarModalAgregar()">+ Nueva Obra</button></h2>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -88,6 +88,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreTxt">
+                                <div class="invalid-feedback" id="nombre-feedback">Debe ingresar un nombre</div>
                             </div>
                         </div>
                     </div>
@@ -96,19 +97,21 @@
                             <div class="form-group">
                                 <label for="fechaInicioTxt">Fecha Inicio</label>
                                 <input type="date" class="form-control" id="fechaInicioTxt" >
+                                <div class="invalid-feedback" id="inicio-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-3 mr-auto">
                             <div class="form-group">
                                 <label for="fechaTerminoTxt">Fecha Termino</label>
                                 <input type="date" class="form-control" id="fechaTerminoTxt">
+                                <div class="invalid-feedback" id="fin-feedback"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess"
                         onclick="agregarObra()" id="agregarBtn">Crear</button>
                 </div>
             </div>
@@ -134,6 +137,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreEdit">
+                                <div class="invalid-feedback" id="nombreEdit-feedback">Debe ingresar un nombre</div>
                             </div>
                         </div>
                     </div>
@@ -142,19 +146,21 @@
                             <div class="form-group">
                                 <label for="fechaInicioTxt">Fecha Inicio</label>
                                 <input type="date" class="form-control" id="fechaInicioEdit" >
+                                <div class="invalid-feedback" id="inicioEdit-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-3 mr-auto">
                             <div class="form-group">
                                 <label for="fechaTerminoTxt">Fecha Termino</label>
                                 <input type="date" class="form-control" id="fechaFinEdit">
+                                <div class="invalid-feedback" id="finEdit-feedback"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess"
                         onclick="editarObra()" id="actualizarBtn">Actualizar</button>
                 </div>
             </div>

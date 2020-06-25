@@ -90,6 +90,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreTxt" placeholder="Ingrese nombre del trabajador">
+                                <div class="invalid-feedback">Agregar nombre</div>
                             </div>
                         </div>
                     </div>
@@ -98,6 +99,7 @@
                             <div class="form-group">
                                 <label for="apellidoTxt">Rut</label>
                                 <input type="text" class="form-control " id="rutTxt" placeholder="Ingrese rut del trabajador">
+                                <div class="invalid-feedback" id="rut-feedback">Agregar el rut</div>
                             </div>
                         </div>
                     </div>
@@ -105,7 +107,8 @@
                         <div class="col-md-6 mx-auto">
                             <div class="form-group">
                                 <label for="contactoTxt">Email</label>
-                                <input type="text" class="form-control " id="emailTxt" placeholder="Ingrese email del trabajador">
+                                <input type="email" class="form-control " id="emailTxt" placeholder="Ingrese email del trabajador">
+                                <div class="invalid-feedback" id="email-feedback">Agregar un correo</div>
                             </div>
                         </div>
                     </div>
@@ -114,6 +117,7 @@
                             <div class="form-group">
                                 <label for="contactoTxt">Contacto</label>
                                 <input type="text" class="form-control " id="contactoTxt" placeholder="Ingrese contacto del trabajador">
+                                <div class="invalid-feedback" id="contacto-feedback">Agregar el contacto</div>
                             </div>
                         </div>
                     </div>
@@ -123,13 +127,14 @@
                                 <label for="rolTxt">Rol</label>
                                 <input type="text" id="rolTxt" required class="form-control"
                                     placeholder="Ingrese rol del trabajador">
+                                <div class="invalid-feedback" id="rol-feedback">Agregar un rol</div>
                             </div>
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess" 
                         onclick="registrarTrabajador()" id="registrarTrabajadorBtn">Registrar</button>
                 </div>
             </div>
@@ -154,6 +159,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreEdit">
+                                <div class="invalid-feedback">Agregar nombre</div>
                             </div>
                         </div>
                     </div>
@@ -162,6 +168,7 @@
                             <div class="form-group">
                                 <label for="apellidoTxt">Rut</label>
                                 <input type="text" class="form-control " id="rutEdit" >
+                                <div class="invalid-feedback" id="rutEdit-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -170,6 +177,7 @@
                             <div class="form-group">
                                 <label for="contactoTxt">Email</label>
                                 <input type="text" class="form-control " id="emailEdit">
+                                <div class="invalid-feedback" id="email-feedback">Agregar un correo</div>
                             </div>
                         </div>
                     </div>
@@ -178,6 +186,7 @@
                             <div class="form-group">
                                 <label for="contactoTxt">Contacto</label>
                                 <input type="text" class="form-control " id="contactoEdit">
+                                <div class="invalid-feedback" id="contacto-feedback">Agregar el contacto</div>
                             </div>
                         </div>
                     </div>
@@ -186,13 +195,14 @@
                             <div class="form-group">
                                 <label for="rolTxt">Rol</label>
                                 <input type="text" id="rolEdit" required class="form-control">
+                                <div class="invalid-feedback" id="rol-feedback">Agregar un rol</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess"
                         onclick="actualizarTrabajador()" id="registrarTrabajadorBtn">Actualizar</button>
                 </div>
             </div>

@@ -25,9 +25,9 @@ function cargarSelectObra() {
 }
 
 function limpiarModalAgregar(){
-    const nombre      = document.querySelector('#nombreTxt');
-    const inicio      = document.querySelector("#inicioTxt");
-    const fin         = document.querySelector('#finTxt');
+    const nombre = document.querySelector('#nombreTxt');
+    const inicio = document.querySelector("#inicioTxt");
+    const fin    = document.querySelector('#finTxt');
 
     nombre.classList.remove('is-invalid');
     inicio.classList.remove('is-invalid');
@@ -62,8 +62,8 @@ function agregarCronograma() {
     let error = false;
 
     if (nombre.value.length == 0) {
-        nombre.classList.add('is-invalid');
         error = true;
+        nombre.classList.add('is-invalid');
     }
 
     if (inicio.value == "") {
@@ -180,28 +180,53 @@ function actualizarModal(id){
 
 function editarFase(){
 
-    let id = idFase;
-    let nombre = document.querySelector('#nombreEdit').value;
-    let fechaInicio = document.querySelector('#inicioEdit').value;
-    let fechaFin = document.querySelector('#finEdit').value;
-    let estado = document.querySelector("#selectEstadoModal").value;
-    let obra = document.querySelector("#selectObraModal").value;
+    const id     = idFase;
+    const nombre = document.querySelector('#nombreEdit');
+    const inicio = document.querySelector('#inicioEdit');
+    const fin    = document.querySelector('#finEdit');
+    const estado = document.querySelector("#selectEstadoModal").value;
+    const obra   = document.querySelector("#selectObraModal").value;
+    let inicioFB = document.querySelector("#inicioEdit-feedback");
+    let finFB    = document.querySelector("#finEdit-feedback");
+    
 
-    let flag = true;
+    inicioFB.innerText = "";
+    finFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
 
-    if (nombre.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese nombre de la fase.'
-        });
+    let error = false;
+
+    if (nombre.value.length == 0) {
+        error = true;
+        nombre.classList.add('is-invalid');
     }
 
-    if (flag){
+    if (inicio.value == "") {
+        error = true;
+        inicio.classList.add('is-invalid');
+        inicioFB.innerText += "Debe ingresar una fecha de inicio";
+    }
+    if (fin.value == "") {
+        error = true;
+        fin.classList.add('is-invalid');
+        finFB.innerText = "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (inicio.value > fin.value ){
+        error = true;
+        inicio.classList.add('is-invalid');
+        fin.classList.add('is-invalid');
+        inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (!error){
+        
         db.collection("cronogramas").doc(id).set({
-            nombre: nombre,
-            fechaInicio: fechaInicio,
-            fechaTermmino: fechaFin,
+            nombre: nombre.value,
+            fechaInicio: inicio.value,
+            fechaTermmino: fin.value,
             estado: estado,
             obra: obra
           }, function(error) {
@@ -215,8 +240,9 @@ function editarFase(){
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });
+        //Cerrar Modal
+        $('#modal-edit').modal('hide');
     }
-    
 }
 
 

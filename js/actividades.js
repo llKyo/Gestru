@@ -8,26 +8,78 @@ const Toast = Swal.mixin({
 });
 //cargar selects 
 
+function limpiarModalAgregar() {
+    const nombre = document.querySelector('#nombreTxt');
+    const inicio = document.querySelector("#inicioTxt");
+    const fin = document.querySelector('#finTxt');
+
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+    nombre.value = "";
+    inicio.value = "";
+    fin.value = "";
+}
 
 //AGREGAR Actividad
 function agregarActividad() {
-    const nombre = document.querySelector('#nombreTxt').value;
-    if ($('#nombreTxt').val().length == 0) {
-        alert('Debe ingresar su nombre y apellido');
+    const nombre     = document.querySelector('#nombreTxt');
+    const inicio     = document.querySelector('#inicioTxt');
+    const fin        = document.querySelector('#finTxt');
+    const cronograma = document.querySelector('#cronogramaSelect');
+    const trabajador = document.querySelector("#trabajadorSelect");
+    let inicioFB     = document.querySelector("#inicio-feedback");
+    let finFB        = document.querySelector("#fin-feedback");
+
+
+    // -------------- VALIDACIONES --------------
+
+    inicioFB.innerText = "";
+    finFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+
+    let error = false;
+
+    if (nombre.value.length == 0) {
+        error = true;
+        nombre.classList.add('is-invalid');
+    }
+
+    if (inicio.value == "") {
+        error = true;
+        inicio.classList.add('is-invalid');
+        inicioFB.innerText += "Debe ingresar una fecha de inicio";
+    }
+    if (fin.value == "") {
+        error = true;
+        fin.classList.add('is-invalid');
+        finFB.innerText = "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (inicio.value > fin.value) {
+        error = true;
+        inicio.classList.add('is-invalid');
+        fin.classList.add('is-invalid');
+        inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (error) {
         return false;
     }
-    const inicio = document.querySelector('#inicioTxt').value;
-    const fin = document.querySelector('#finTxt').value;
-    const cronograma = document.querySelector('#cronogramaSelect').value;
-    const trabajador = document.querySelector("#trabajadorSelect").value;
+
+    // -------------- FIN VALIDACIONES --------------
 
 
     db.collection("actividades").add({
-        nombre: nombre,
-        fechaInicio: inicio,
-        fechaTermmino: fin,
-        cronograma: cronograma,
-        trabajador: trabajador
+        nombre: nombre.value,
+        fechaInicio: inicio.value,
+        fechaTermmino: fin.value,
+        cronograma: cronograma.value,
+        trabajador: trabajador.value
     })
         .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
@@ -42,6 +94,9 @@ function agregarActividad() {
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
+    
+    //Cerrar Modal
+    $('#modal-lg').modal('hide');
 }
 //Mostrar de Actividades
 const table = document.querySelector('#tableActividades');
@@ -120,30 +175,58 @@ function actualizarModal(id){
 
 function actualizarActividad(){
 
-    let id = idActividad;
-    let nombre = document.querySelector('#nombreEdit').value;
-    let fechaInicio = document.querySelector('#inicioEdit').value;
-    let fechaFin = document.querySelector('#finEdit').value;
-    let fase = document.querySelector("#cronogramaSelectEdit").value;
-    let trabajador = document.querySelector("#trabajadorSelectEdit").value;
+    let id         = idActividad;
+    let nombre     = document.querySelector('#nombreEdit');
+    let inicio     = document.querySelector('#inicioEdit');
+    let fin        = document.querySelector('#finEdit');
+    let fase       = document.querySelector("#cronogramaSelectEdit");
+    let trabajador = document.querySelector("#trabajadorSelectEdit");
+    let inicioFB   = document.querySelector("#inicioEdit-feedback");
+    let finFB      = document.querySelector("#finEdit-feedback");
 
-    let flag = true;
+    inicioFB.innerText = "";
+    finFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
 
-    if (nombre.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese nombre de la fase.'
-        });
+    let error = false;
+
+    if (nombre.value.length == 0) {
+        error = true;
+        nombre.classList.add('is-invalid');
     }
 
-    if (flag){
+    if (inicio.value == "") {
+        error = true;
+        inicio.classList.add('is-invalid');
+        inicioFB.innerText += "Debe ingresar una fecha de inicio";
+    }
+    if (fin.value == "") {
+        error = true;
+        fin.classList.add('is-invalid');
+        finFB.innerText = "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (inicio.value > fin.value) {
+        error = true;
+        inicio.classList.add('is-invalid');
+        fin.classList.add('is-invalid');
+        inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
+    }
+    if (trabajador.value == "") {
+        error = true;
+        trabajador.classList.add('is-invalid');
+
+    }
+
+    if (!error){
         db.collection("actividades").doc(id).set({
-            nombre: nombre,
-            fechaInicio: fechaInicio,
-            fechaTermmino: fechaFin,
-            cronograma: fase,
-            trabajador: trabajador
+            nombre: nombre.value,
+            fechaInicio: inicio.value,
+            fechaTermmino: fin.value,
+            cronograma: fase.value,
+            trabajador: trabajador.value
           }, function(error) {
             if (error) {
               // The write failed...
@@ -155,6 +238,8 @@ function actualizarActividad(){
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });
+        //Cerrar Modal
+        $('#modal-edit').modal('hide');
     }
     
 }

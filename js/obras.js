@@ -7,20 +7,71 @@ const Toast = Swal.mixin({
     timer: 3000
 });
 
-function agregarObra() {
+function limpiarModalAgregar(){
+    const nombre = document.querySelector('#nombreTxt');
+    const inicio = document.querySelector("#fechaInicioTxt");
+    const fin    = document.querySelector('#fechaTerminoTxt');
 
-    const nombre = document.querySelector('#nombreTxt').value;
-    if ($('#nombreTxt').val().length == 0) {
-        alert('Debe ingresar un nombre a la obra');
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+    nombre.value = "";
+    inicio.value = "";
+    fin.value    = "";
+}
+
+function agregarObra() {
+    const nombre = document.querySelector('#nombreTxt');
+    const inicio = document.querySelector('#fechaInicioTxt');
+    const fin    = document.querySelector('#fechaTerminoTxt');
+    let inicioFB = document.querySelector("#inicio-feedback");
+    let finFB    = document.querySelector("#fin-feedback");
+
+    // -------------- VALIDACIONES --------------
+
+    inicioFB.innerText = "";
+    finFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+
+    let error = false;
+
+    if (nombre.value.length == 0) {
+        error = true;
+        nombre.classList.add('is-invalid');
+    }
+
+    if (inicio.value == "") {
+        error = true;
+        inicio.classList.add('is-invalid');
+        inicioFB.innerText += "Debe ingresar una fecha de inicio";
+    }
+    if (fin.value == "") {
+        error = true;
+        fin.classList.add('is-invalid');
+        finFB.innerText = "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (inicio.value > fin.value) {
+        error = true;
+        inicio.classList.add('is-invalid');
+        fin.classList.add('is-invalid');
+        inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (error) {
         return false;
     }
-    const inicio = document.querySelector('#fechaInicioTxt').value;
-    const fin = document.querySelector('#fechaInicioTxt').value;
+
+    // -------------- FIN VALIDACIONES --------------
 
     db.collection("obras").add({
-        nombre: nombre,
-        fechaInicio: inicio,
-        fechaTermmino: fin,
+        nombre: nombre.value,
+        fechaInicio: inicio.value,
+        fechaTermmino: fin.value,
     })
         .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
@@ -35,6 +86,9 @@ function agregarObra() {
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
+    
+    //Cerrar Modal
+    $('#modal-lg').modal('hide');
 }
 
 //Mostrar Obras
@@ -94,26 +148,50 @@ function actualizarModal(id){
 
 function editarObra(){
 
-    let id = idObra;
-    let nombre = document.querySelector('#nombreEdit').value;
-    let fechaInicio = document.querySelector('#fechaInicioEdit').value;
-    let fechaFin = document.querySelector('#fechaFinEdit').value;
+    let id       = idObra;
+    let nombre   = document.querySelector('#nombreEdit');
+    let inicio   = document.querySelector('#fechaInicioEdit');
+    let fin      = document.querySelector('#fechaFinEdit');
+    let inicioFB = document.querySelector("#inicioEdit-feedback");
+    let finFB    = document.querySelector("#finEdit-feedback");
 
-    let flag = true;
 
-    if (nombre.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese nombre de la obra.'
-        });
+    inicioFB.innerText = "";
+    finFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    inicio.classList.remove('is-invalid');
+    fin.classList.remove('is-invalid');
+
+    let error = false;
+
+    if (nombre.value.length == 0) {
+        error = true;
+        nombre.classList.add('is-invalid');
     }
 
-    if (flag){
+    if (inicio.value == "") {
+        error = true;
+        inicio.classList.add('is-invalid');
+        inicioFB.innerText += "Debe ingresar una fecha de inicio";
+    }
+    if (fin.value == "") {
+        error = true;
+        fin.classList.add('is-invalid');
+        finFB.innerText = "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (inicio.value > fin.value) {
+        error = true;
+        inicio.classList.add('is-invalid');
+        fin.classList.add('is-invalid');
+        inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
+    }
+
+    if (!error){
         db.collection("obras").doc(id).set({
-            nombre: nombre,
-            fechaInicio: fechaInicio,
-            fechaTermmino: fechaFin
+            nombre: nombre.value,
+            fechaInicio: inicio.value,
+            fechaTermmino: fin.value
           }, function(error) {
             if (error) {
               // The write failed...
@@ -125,6 +203,8 @@ function editarObra(){
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });
+        //Cerrar Modal
+        $('#modal-edit').modal('hide');
     }
     
 }

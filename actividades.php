@@ -67,7 +67,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Crear nueva actividad</h4>
+                    <h4 class="modal-title" onclick="limpiarModalAgregar()">Crear nueva actividad</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -78,6 +78,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreTxt">
+                                <div class="invalid-feedback" id="nombre-feedback">Debe ingresar un nombre</div>
                             </div>
                         </div>
                     </div>
@@ -86,12 +87,14 @@
                             <div class="form-group">
                                 <label for="inicioTxt">Fecha de Inicio</label>
                                 <input type="date" class="form-control " id="inicioTxt">
+                                <div class="invalid-feedback" id="inicio-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-3 mr-auto">
                             <div class="form-group">
                                 <label for="finTxt">Fecha de Término</label>
                                 <input type="date" class="form-control " id="finTxt">
+                                <div class="invalid-feedback" id="fin-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -109,7 +112,7 @@
                         <div class="col-md-3 mr-auto ">
                             <div class="form-group">
                                 <label for="finTxt">Trabajadores Asociados</label>
-                                <select name="" class="form-control" multiple id="trabajadorSelect">
+                                <select name="" class="form-control" id="trabajadorSelect">
                                     <option value="juan">juan</option>
                                     <option value="momo">momo</option>
                                     <option value="chan">chan</option>
@@ -121,7 +124,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess"
                         onclick="agregarActividad()" id="agregarActividadBtn">Crear</button>
                 </div>
             </div>
@@ -146,6 +149,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreEdit">
+                                <div class="invalid-feedback" id="nombreEdit-feedback">Debe ingresar un nombre</div>
                             </div>
                         </div>
                     </div>
@@ -154,12 +158,14 @@
                             <div class="form-group">
                                 <label for="inicioTxt">Fecha de Inicio</label>
                                 <input type="date" class="form-control " id="inicioEdit">
+                                <div class="invalid-feedback" id="inicioEdit-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-3 mr-auto">
                             <div class="form-group">
                                 <label for="finTxt">Fecha de Término</label>
                                 <input type="date" class="form-control " id="finEdit">
+                                <div class="invalid-feedback" id="finEdit-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -177,10 +183,11 @@
                         <div class="col-md-3 mr-auto ">
                             <div class="form-group">
                                 <label for="finTxt">Trabajadores Asociados</label>
-                                <select name="" class="form-control" multiple id="trabajadorSelectEdit">
+                                <select name="" class="form-control" id="trabajadorSelectEdit">
                                     <option value="juan">juan</option>
                                     <option value="momo">momo</option>
                                     <option value="chan">chan</option>
+                                    <div class="invalid-feedback">Debe ingresar un trabajador</div>
                                 </select>
                             </div>
                         </div>
@@ -189,7 +196,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess"
                         onclick="actualizarActividad()" id="agregarActividadBtn">Actualizar</button>
                 </div>
             </div>

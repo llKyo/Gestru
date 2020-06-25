@@ -6,45 +6,83 @@ const Toast = Swal.mixin({
     showConfirmButton: false,
     timer: 3000
 });
+//SCRIPT VALIDADOR DE RUT
+const Fn = {
+    // Valida el rut con su cadena completa "XXXXXXXX-X"
+    validaRut: function (rutCompleto) {
+        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto))
+            return false;
+        let tmp = rutCompleto.split('-');
+        let digv = tmp[1];
+        let rut = tmp[0];
+        if (digv == 'K') digv = 'k';
+        return (Fn.dv(rut) == digv);
+    },
+    dv: function (T) {
+        let M = 0, S = 1;
+        for (; T; T = Math.floor(T / 10))
+            S = (S + T % 10 * (9 - M++ % 6)) % 11;
+        return S ? S - 1 : 'k';
+    }
+}
+
 
 mostrarTrabajadores();
 
 function registrarTrabajador() {
-    let nombre = document.querySelector("#nombreTxt").value.trim();
-    let rut = document.querySelector("#rutTxt").value.trim();
-    let contacto = document.querySelector("#contactoTxt").value.trim();
-    let email = document.querySelector("#emailTxt").value.trim();
-    let rol = document.querySelector("#rolTxt").value.trim();
+    let nombre   = document.querySelector("#nombreTxt");
+    let rut      = document.querySelector("#rutTxt");
+    let contacto = document.querySelector("#contactoTxt");
+    let email    = document.querySelector("#emailTxt");
+    let rol      = document.querySelector("#rolTxt");
+    let rutFB    = document.querySelector("#rut-feedback");
 
-    let flag = true;
-    if (nombre == "") {
-        alert("Debe ingresar Nombre del trabajador");
-        flag = false;
+    // -------------- VALIDACIONES --------------
+
+    rutFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    rut.classList.remove('is-invalid');
+    contacto.classList.remove('is-invalid');
+    email.classList.remove('is-invalid');
+    rol.classList.remove('is-invalid');
+
+    let error = false;
+
+    if (nombre.value == "") {
+        error = true;
+        nombre.classList.add('is-invalid');
     }
-    if (rut == "") {
-        alert("Debe ingresar RUT del trabajador");
-        flag = false;
+    if (rut.value == "") {
+        error = true;
+        rut.classList.add('is-invalid');
+        rutFB.innerText = "Debe ingresar un rut";
+    } else if (!Fn.validaRut(rut.value)) {
+        error = true;
+        rut.classList.add('is-invalid');
+        rutFB.innerText = "Debe ingresar un rut válido";
+    } 
+    if (contacto.value == "") {
+        error = true;
+        contacto.classList.add('is-invalid');
     }
-    if (contacto == "") {
-        alert("Debe ingresar Contacto del trabajador");
-        flag = false;
+    if (email.value == "") {
+        error = true;
+        email.classList.add('is-invalid');
     }
-    if (email == "") {
-        alert("Debe ingresar EMAIL del trabajador");
-        flag = false;
-    }
-    if (rol == "") {
-        alert("Debe ingresar Rol del trabajador");
-        flag = false;
+    if (rol.value == "") {
+        error = true;
+        rol.classList.add('is-invalid');
     }
 
-    if (flag) {
+    // -------------- FIN VALIDACIONES --------------
+
+    if (!error) {
         db.collection("trabajadores").add({
-            nombre: nombre,
-            rut: rut,
-            contacto: contacto,
-            email: email,
-            rol: rol
+            nombre: nombre.value.trim(),
+            rut: rut.value.trim(),
+            contacto: contacto.value.trim(),
+            email: email.value.trim(),
+            rol: rol.value.trim()
         })
             .then(function (docRef) {
                 console.log("Document written with ID: ", docRef.id);
@@ -60,6 +98,8 @@ function registrarTrabajador() {
                     title: 'Ocurrió un Error, Verifique los datos e intente nuevamente'
                 });
             });
+        //Cerrar Modal
+        $('#modal-lg').modal('hide');
     }
 
 }
@@ -123,58 +163,59 @@ function actualizarModal(id){
 
 function actualizarTrabajador(){
 
-    let id = idTrabajador;
-    let nombre = document.querySelector('#nombreEdit').value;
-    let rut = document.querySelector('#rutEdit').value;
-    let email = document.querySelector('#emailEdit').value;
-    let contacto = document.querySelector("#contactoEdit").value;
-    let rol = document.querySelector("#rolEdit").value;
+    let id       = idTrabajador;
+    let nombre   = document.querySelector('#nombreEdit');
+    let rut      = document.querySelector('#rutEdit');
+    let email    = document.querySelector('#emailEdit');
+    let contacto = document.querySelector("#contactoEdit");
+    let rol      = document.querySelector("#rolEdit");
+    let rutFB    = document.querySelector("#rutEdit-feedback");
 
-    let flag = true;
+    // -------------- VALIDACIONES --------------
 
-    if (nombre.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese nombre del trabajador.'
-        });
+    rutFB.innerText = "";
+    nombre.classList.remove('is-invalid');
+    rut.classList.remove('is-invalid');
+    contacto.classList.remove('is-invalid');
+    email.classList.remove('is-invalid');
+    rol.classList.remove('is-invalid');
+
+    let error = false;
+
+    if (nombre.value == "") {
+        error = true;
+        nombre.classList.add('is-invalid');
     }
-    if (rut.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese rut del trabajador.'
-        });
+    if (rut.value == "") {
+        error = true;
+        rut.classList.add('is-invalid');
+        rutFB.innerText = "Debe ingresar un rut";
+    } else if (!Fn.validaRut(rut.value)) {
+        error = true;
+        rut.classList.add('is-invalid');
+        rutFB.innerText = "Debe ingresar un rut válido";
     }
-    if (email.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese email del trabajador.'
-        });
+    if (contacto.value == "") {
+        error = true;
+        contacto.classList.add('is-invalid');
     }
-    if (contacto.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese contacto del trabajador.'
-        });
+    if (email.value == "") {
+        error = true;
+        email.classList.add('is-invalid');
     }
-    if (rol.trim("")== ""){
-        flag = false;
-        Toast.fire({
-            icon: 'warning',
-            title: 'Ingrese rol del trabajador.'
-        });
+    if (rol.value == "") {
+        error = true;
+        rol.classList.add('is-invalid');
     }
 
-    if (flag){
+    // -------------- FIN VALIDACIONES --------------
+    if (!error){
         db.collection("trabajadores").doc(id).set({
-            nombre: nombre,
-            rut: rut,
-            email: email,
-            contacto: contacto,
-            rol: rol
+            nombre: nombre.value,
+            rut: rut.value,
+            email: email.value,
+            contacto: contacto.value,
+            rol: rol.value
           }, function(error) {
             if (error) {
               // The write failed...
@@ -186,6 +227,8 @@ function actualizarTrabajador(){
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });
+        //Cerrar Modal
+        $('#modal-edit').modal('hide');
     }
     
 }

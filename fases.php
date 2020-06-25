@@ -160,6 +160,7 @@
                             <div class="form-group">
                                 <label for="nombreTxt">Nombre</label>
                                 <input type="text" class="form-control " id="nombreEdit">
+                                <div class="invalid-feedback">Debe ingresar un nombre</div>
                             </div>
                         </div>
                     </div>
@@ -168,12 +169,14 @@
                             <div class="form-group">
                                 <label for="inicioTxt">Fecha de Inicio</label>
                                 <input type="date" class="form-control " id="inicioEdit">
+                                <div class="invalid-feedback" id="inicioEdit-feedback"></div>
                             </div>
                         </div>
                         <div class="col-md-3 mr-auto">
                             <div class="form-group">
                                 <label for="finTxt">Fecha de Término</label>
                                 <input type="date" class="form-control " id="finEdit">
+                                <div class="invalid-feedback" id="finEdit-feedback"></div>
                             </div>
                         </div>
                     </div>
@@ -199,7 +202,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess" data-dismiss="modal"
+                    <button type="button" class="btn btn-success swalDefaultSuccess"
                         onclick="editarFase()" id="editarCronogramaBtn">Actualizar</button>
                 </div>
             </div>
