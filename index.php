@@ -26,7 +26,7 @@
         <div class="container">       
             <h1 class="logo">
                 <a class="scrollto" href="#hero">
-                    <span class="logo-icon-wrapper"><img class="logo-icon" src="assets/images/logo-icon.svg" alt="icon"></span>
+                    <span class="logo-icon-wrapper"><img class="logo-icon" src="dist/img/logo.png" alt="icon"></span>
                     <span class="text"><span class="highlight">Ges</span>tru</span></a>
             </h1><!--//logo-->
             <nav class="main-nav navbar-expand-md float-right navbar-inverse" role="navigation">
@@ -78,11 +78,11 @@
 					<div class="item-content container">
     					<div class="item-content-inner">
     				        
-				            <h2 class="heading">Gestru dicen por algunos lares que es la wea mas bkn del a vida<br class="d-none d-md-block"></h2>
+				            <h2 class="heading">Título<br class="d-none d-md-block"></h2>
 				            <p class="intro">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
                             dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
                             book.</p>
-				            <a class="btn btn-primary btn-cta" href="#" target="_blank">Confirmo!</a>
+				            <a class="btn btn-primary btn-cta" href="#" target="_blank">Registrarme</a>
 				            
     					</div><!--//item-content-inner-->
 					</div><!--//item-content-->
@@ -92,9 +92,9 @@
 					<div class="item-content container">
 						<div class="item-content-inner">
     				        
-				            <h2 class="heading">Kyo Lover?</h2>
-				            <p class="intro">Gestru Landing is built on Bootstrap 4 and SASS so it's quick and easy to customise!</p>
-				            <a class="btn btn-primary btn-cta" href="#" target="_blank">uwu</a>
+				            <h2 class="heading">Título 2</h2>
+				            <p class="intro">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa harum aut cam.</p>
+				            <a class="btn btn-primary btn-cta" href="#" target="_blank">Obtener Ahora!</a>
     				        
     					</div><!--//item-content-inner-->
 					</div>
@@ -103,8 +103,8 @@
 				<div class="carousel-item item-3">
 					<div class="item-content container">
 						<div class="item-content-inner">    				        
-				            <h2 class="heading">Ready to build outstanding product?</h2>
-				            <p class="intro">Get Gestru Landing today and it will help you promote your product effectively!</p>
+				            <h2 class="heading">¿Listo para probar Gestru?</h2>
+				            <p class="intro">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 				            <a class="btn btn-primary btn-cta" href="#" target="_blank">Empezar</a>
     					</div><!--//item-content-inner-->
 					</div>
@@ -119,34 +119,34 @@
     <div id="pricing" class="pricing-section">
         <div class="container text-center">
             <h2 class="section-title">Precios</h2>
-            <div class="intro">Gestru Landing's future updates are 100% FREE for existing customers</div>
+            <div class="intro">Diseño vía ejemplo de módulo adicional de publicidad a las ventas</div>
             <div class="pricing-wrapper row">
                 <div class="item item-1 col-md-4 col-12">
                     <div class="item-inner">
-                        <h3 class="item-heading">Gratis<br><span class="item-heading-desc">(Versión básica)</span></h3>
+                        <h3 class="item-heading">Presupuesto<br><span class="item-heading-desc"></span></h3>
                         <div class="price-figure">
-                            <span class="currency">$</span><span class="number">0</span>
+                            <span class="currency"></span><span class="number">Gratis</span>
                         </div><!--//price-figure-->
                         <ul class="list-unstyled mb-3">
-	                        <li class="mb-2"><i class="fas fa-check"></i> Instalación simple</li>
-	                        <li class="mb-2"><i class="fas fa-times"></i> Multiple usuario</li>
-                            <li class="mb-2"><i class="fas fa-times"></i> Funciones premium</li>
+	                        <li class="mb-2"><i class="fas fa-check"></i> Detalle de los costos de la obra</li>
+                            <li class="mb-2"><i class="fas fa-check"></i> Tiempo estimado del término de la obra</li>
+                            
                         </ul>
-                        <div class="mb-3"><a href="#" target="_blank">Detalles</a></div>
-                        <a class="btn btn-cta" href="#">Obtener Ahora</a>                        
+                        <div class="mb-3 pt-2"><a href="#" target="_blank">Detalles</a></div>
+                        <a class="btn btn-cta" href="#">Contáctanos</a>                        
                     </div><!--//item-inner-->
                 </div><!--//item-->
                 <div class="item item-2 col-md-4 col-12">
                     <div class="item-inner">
-                        <h3 class="item-heading">Aplicación Avanzada<br><span class="item-heading-desc">(Commercial License)</span></h3>
+                        <h3 class="item-heading">Obra básica<br><span class="item-heading-desc"></span></h3>
                        
                         <div class="price-figure">
-                            <span class="currency">$</span><span class="number">29</span>
+                            <span class="currency">$</span><span class="number">20.000</span><br><h5></h5>
                         </div><!--//price-figure-->
                         <ul class="list-unstyled mb-3">
-                            <li class="mb-2"><i class="fas fa-check"></i> Instalación simple</li>
-                            <li class="mb-2"><i class="fas fa-check"></i> Multiple usuario</li>
-                            <li class="mb-2"><i class="fas fa-times"></i> Funciones premium</li>
+                            <li class="mb-2"><i class="fas fa-check"></i> Estado de avance diario</li>
+                            <li class="mb-2"><i class="fas fa-check"></i> Monitoreo del personal involucrado</li>
+                            <li class="mb-2"><i class="fas fa-times"></i> Disponibilidad 24/7</li>
                         </ul>
                         <div class="mb-3"><a href="#" target="_blank">Detalles</a></div>
                         <a class="btn btn-cta" href="#">Obtener Ahora!</a>
@@ -156,14 +156,14 @@
                 
                 <div class="item item-3 col-md-4 col-12">
                     <div class="item-inner">
-                        <h3 class="item-heading">Aplicación Premium<br><span class="item-heading-desc">(Commercial License)</span></h3>
+                        <h3 class="item-heading">Obra Avanzada<br><span class="item-heading-desc"></span></h3>
                         <div class="price-figure">
-                            <span class="currency">$</span><span class="number">99</span>
+                            <span class="currency">$</span><span class="number">50.000</span>
                         </div><!--//price-figure-->
                         <ul class="list-unstyled mb-3">
-                            <li class="mb-2"><i class="fas fa-check"></i> Instalación simple</li>
-                            <li class="mb-2"><i class="fas fa-check"></i> Multiple usuario</li>
-                            <li class="mb-2"><i class="fas fa-check"></i> Funciones premium</li>
+                            <li class="mb-2"><i class="fas fa-check"></i> Estado de avance diario</li>
+                            <li class="mb-2"><i class="fas fa-check"></i> Monitoreo del personal involucrado</li>
+                            <li class="mb-2"><i class="fas fa-check"></i> Disponibilidad 24/7</li>
                         </ul>
                         <div class="mb-3"><a href="#" target="_blank">Detalles</a></div>
                         <a class="btn btn-cta" href="#" target="_blank">Obtener Ahora!</a>
@@ -181,7 +181,7 @@
     <footer class="footer text-center">
         <div class="container">
             <!--/* This template is released under the Creative Commons Attribution 3.0 License. Please keep the attribution link below when using for your own project. Thank you for your support. :) If you'd like to use the template without the attribution, you can buy the commercial license via our website: themes.3rdwavemedia.com */-->
-            <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="#" target="_blank">Kyo Chino 🐤</a></small>
+            <small class="copyright">Designed with <i class="fas fa-heart"></i> by <a href="https://github.com/llKyo" target="_blank">Kyo Chino 🐤</a></small>
             
             
         </div><!--//container-->

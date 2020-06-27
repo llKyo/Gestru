@@ -78,7 +78,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title">Detalle de base de obra</h2>
+                <h2 class="card-title">Detalle de la fase de obra</h2>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
