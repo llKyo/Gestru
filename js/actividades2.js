@@ -109,7 +109,6 @@ db.collection("actividades").onSnapshot((querySnapshot) => {
         <td>${doc.data().nombre}</td>
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
-        <td>${doc.data().cronograma}</td>
         <td>${doc.data().trabajador}</td>
         <td class="project-actions text-center">
         <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
@@ -139,10 +138,10 @@ function cargarSelect(){
         select.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             select.innerHTML += `
-            <option>${doc.data().nombre}</option>
+            <option value="${doc.id}">${doc.data().nombre}</option>
             `
         })
-
+        
     });
 
 }
@@ -168,7 +167,7 @@ function actualizarModal(id){
         select.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             select.innerHTML += `
-            <option>${doc.data().nombre}</option>
+            <option value="${doc.id}">${doc.data().nombre}</option>
             `
         })
 
@@ -246,3 +245,44 @@ function actualizarActividad(){
     
 }
 
+cargarSelectFase();
+
+function cargarSelectFase() {
+    const selectFase = document.querySelector("#selectFase");
+    db.collection("cronogramas").onSnapshot((querySnapshot) => {
+        selectFase.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            //const nombre = doc.nombreObra;
+            selectFase.innerHTML += `
+            <option value="${doc.id}">${doc.data().nombre}</option>
+            `
+        })
+
+    })
+}
+
+function buscarFase() {
+    const fase = document.querySelector('#selectFase').value;
+    const table = document.querySelector('#tableActividades');
+    table.innerHTML = '';
+    db.collection("actividades").onSnapshot((querySnapshot) => {
+        table.innerHTML = '';
+        querySnapshot.forEach((doc) => {
+            //const id = doc.id;
+            if (fase == doc.data().cronograma){
+                const id = doc.id;
+                table.innerHTML += `
+                <tr>
+                <td>${doc.data().nombre}</td>
+                <td>${doc.data().fechaInicio}</td>
+                <td>${doc.data().fechaTermmino}</td>
+                <td>${doc.data().trabajador}</td>
+                <td class="project-actions text-center">
+                <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
+                <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
+                </tr>`
+            }
+    
+        })
+    });
+}
