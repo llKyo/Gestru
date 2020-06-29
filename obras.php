@@ -169,6 +169,30 @@
         <!-- /.modal-dialog -->
     </div>
 
+    <!-- Modal confirmar delete -->
+    <div class="modal fade" id="modal-delete">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">¿Estás seguro?</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- <div class="modal-body">
+              <p>Al eliminar la obra se eliminarán las fases y actividades relacionadas con esta.</p>
+            </div> -->
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-danger" onclick="eliminar()">Eliminar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- Fin Modal confirmar delete -->
+
 <?php require_once "templates/footer.php"; ?>
 <?php require_once "templates/scripts.php"; ?>
 

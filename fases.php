@@ -38,24 +38,42 @@
                         title="Remove">
                         <i class="fas fa-times"></i></button>
                 </div>
+                <div class="row">
+                    <div class="col-md-3 ml-auto text-right">
+                        <div class="form-group">
+                            <label for="selectObra" style="margin-top: 0.3rem;">Filtrar por obra</label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select id="selectObra1" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mr-auto">
+                        <div class="form-group">
+                            <button class="btn btn-warning form-control text-uppercase font-weight-bold"
+                                onclick="buscarObra()" id="buscarObraBtn">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="width: 15%">
+                            <th>
                                 Fase
                             </th>
-                            <th style="width: 10%">
+                            <th>
                                 Fecha Inicio
                             </th>
-                            <th style="width: 10%">
+                            <th>
                                 Fecha Fin
                             </th>
-                            <th style="width: 15%">
+                            <th>
                                 Obra
                             </th>
-                            <th style="width: 20%">
+                            <th>
                                 Progreso
                             </th>
                             <th style="width: 8%" class="text-center">
@@ -202,16 +220,42 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess"
-                        onclick="editarFase()" id="editarCronogramaBtn">Actualizar</button>
+                    <button type="button" class="btn btn-success swalDefaultSuccess" onclick="editarFase()"
+                        id="editarCronogramaBtn">Actualizar</button>
                 </div>
             </div>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
+
+        
     </div>
 </div>
 <!-- /.content-wrapper -->
+
+<!-- Modal confirmar delete -->
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">¿Estás seguro?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- <div class="modal-body">
+              <p>Al eliminar la obra se eliminarán las fases y actividades relacionadas con esta.</p>
+            </div> -->
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" onclick="eliminar()">Eliminar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- Fin Modal confirmar delete -->
 
 <?php require_once "templates/footer.php"; ?>
 <?php require_once "templates/scripts.php"; ?>

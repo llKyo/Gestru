@@ -24,13 +24,13 @@ function limpiarModalAgregar() {
 
 //AGREGAR Actividad
 function agregarActividad() {
-    const nombre     = document.querySelector('#nombreTxt');
-    const inicio     = document.querySelector('#inicioTxt');
-    const fin        = document.querySelector('#finTxt');
+    const nombre = document.querySelector('#nombreTxt');
+    const inicio = document.querySelector('#inicioTxt');
+    const fin = document.querySelector('#finTxt');
     const cronograma = document.querySelector('#cronogramaSelect');
     const trabajador = document.querySelector("#trabajadorSelect");
-    let inicioFB     = document.querySelector("#inicio-feedback");
-    let finFB        = document.querySelector("#fin-feedback");
+    let inicioFB = document.querySelector("#inicio-feedback");
+    let finFB = document.querySelector("#fin-feedback");
 
 
     // -------------- VALIDACIONES --------------
@@ -94,7 +94,7 @@ function agregarActividad() {
         .catch(function (error) {
             console.error("Error adding document: ", error);
         });
-    
+
     //Cerrar Modal
     $('#modal-lg').modal('hide');
 }
@@ -109,23 +109,29 @@ db.collection("actividades").onSnapshot((querySnapshot) => {
         <td>${doc.data().nombre}</td>
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
-        <td>${doc.data().cronograma}</td>
         <td>${doc.data().trabajador}</td>
         <td class="project-actions text-center">
         <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
-        <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
+        <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
         </td>
         </tr>`
     });
 });
 
-//Borrar Acitivdad
+
+let idEliminar;
+const addIdModalEliminar = (id) => idEliminar = id;
+
+//Borrar Actividad
 function eliminar(id) {
+    id = idEliminar;
     db.collection("actividades").doc(id).delete().then(function () {
         Toast.fire({
-            icon: 'warning',
-            title: 'Documento borrado correctamente.'
+            icon: 'success',
+            title: 'Actividad borrada correctamente.'
         });
+        //Cerrar Modal
+        $('#modal-delete').modal('hide');
         console.log("Documento borrado Correctamente.");
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
@@ -133,13 +139,13 @@ function eliminar(id) {
 }
 
 //cargar selects 
-function cargarSelect(){
+function cargarSelect() {
     let select = document.querySelector("#cronogramaSelect");
     db.collection("cronogramas").onSnapshot((querySnapshot) => {
         select.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             select.innerHTML += `
-            <option>${doc.data().nombre}</option>
+            <option value="${doc.id}">${doc.data().nombre}</option>
             `
         })
 
@@ -147,19 +153,19 @@ function cargarSelect(){
 
 }
 
-function actualizarModal(id){
+function actualizarModal(id) {
     idActividad = id;
- 
+
     db.collection("actividades").onSnapshot((querySnapshot) => {
-    
+
         querySnapshot.forEach((doc) => {
             const id = doc.id;
-            if (idActividad == id){
+            if (idActividad == id) {
                 document.querySelector("#nombreEdit").value = doc.data().nombre;
                 document.querySelector("#inicioEdit").value = doc.data().fechaInicio;
                 document.querySelector("#finEdit").value = doc.data().fechaTermmino;
             }
-    
+
         })
     });
 
@@ -168,23 +174,23 @@ function actualizarModal(id){
         select.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             select.innerHTML += `
-            <option>${doc.data().nombre}</option>
+            <option value="${doc.id}">${doc.data().nombre}</option>
             `
         })
 
     });
 }
 
-function actualizarActividad(){
+function actualizarActividad() {
 
-    let id         = idActividad;
-    let nombre     = document.querySelector('#nombreEdit');
-    let inicio     = document.querySelector('#inicioEdit');
-    let fin        = document.querySelector('#finEdit');
-    let fase       = document.querySelector("#cronogramaSelectEdit");
+    let id = idActividad;
+    let nombre = document.querySelector('#nombreEdit');
+    let inicio = document.querySelector('#inicioEdit');
+    let fin = document.querySelector('#finEdit');
+    let fase = document.querySelector("#cronogramaSelectEdit");
     let trabajador = document.querySelector("#trabajadorSelectEdit");
-    let inicioFB   = document.querySelector("#inicioEdit-feedback");
-    let finFB      = document.querySelector("#finEdit-feedback");
+    let inicioFB = document.querySelector("#inicioEdit-feedback");
+    let finFB = document.querySelector("#finEdit-feedback");
 
     inicioFB.innerText = "";
     finFB.innerText = "";
@@ -222,27 +228,68 @@ function actualizarActividad(){
 
     }
 
-    if (!error){
+    if (!error) {
         db.collection("actividades").doc(id).set({
             nombre: nombre.value,
             fechaInicio: inicio.value,
             fechaTermmino: fin.value,
             cronograma: fase.value,
             trabajador: trabajador.value
-          }, function(error) {
+        }, function (error) {
             if (error) {
-              // The write failed...
+                // The write failed...
             } else {
-              // Data saved successfully!
+                // Data saved successfully!
             }
-          });
-          Toast.fire({
+        });
+        Toast.fire({
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });
         //Cerrar Modal
         $('#modal-edit').modal('hide');
     }
-    
+
 }
 
+cargarSelectFase();
+
+function cargarSelectFase() {
+    const selectFase = document.querySelector("#selectFase");
+    db.collection("cronogramas").onSnapshot((querySnapshot) => {
+        selectFase.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            selectFase.innerHTML += `
+            <option value="${doc.id}">${doc.data().nombre}</option>
+            `
+        })
+
+    })
+}
+
+function buscarFase() {
+    const fase = document.querySelector('#selectFase').value;
+    const table = document.querySelector('#tableActividades');
+    table.innerHTML = '';
+    db.collection("actividades").onSnapshot((querySnapshot) => {
+        table.innerHTML = '';
+        querySnapshot.forEach((doc) => {
+            //const id = doc.id;
+            if (fase == doc.data().cronograma) {
+                const id = doc.id;
+                table.innerHTML += `
+                <tr>
+                <td>${doc.data().nombre}</td>
+                <td>${doc.data().fechaInicio}</td>
+                <td>${doc.data().fechaTermmino}</td>
+                <td>${doc.data().trabajador}</td>
+                <td class="project-actions text-center">
+                    <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
+                    <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
+                </td>
+                </tr>`
+            }
+
+        })
+    });
+}

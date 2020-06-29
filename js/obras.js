@@ -107,26 +107,68 @@ db.collection("obras").onSnapshot((querySnapshot) => {
         </td>
         <td class="project-actions text-center">
         <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
-        <a class="btn btn-danger btn-md" href="#" onclick=eliminar('${id}')><i class="fas fa-trash"></i>Eliminar</a>
+        <a class="btn btn-danger text-white btn-md" data-toggle="modal" data-target="#modal-delete" 
+        onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
         </td>
         </tr>`
 
     })
 
 });
+let idEliminar;
+const addIdModalEliminar = (id) => idEliminar = id;
 
-function eliminar(id) {
+// TODO implementar feedback 
+let eliminados = "";
+
+const eliminar = () => {
+    id = idEliminar;
+    db.collection("cronogramas").onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data().obra);
+            if (id == doc.data().obra) {
+                eliminados += `Fase ${doc.data().nombre} eliminada. \n`;
+                eliminarCronogramas(doc.id);
+            }
+        })
+    });
     db.collection("obras").doc(id).delete().then(function () {
+        eliminados += `Obra eliminada.`;
         Toast.fire({
-            icon: 'warning',
-            title: 'Documento borrado correctgmente(actividad)'
+            icon: 'success',
+            title: 'Obra eliminada exitosamente',
         });
+        //Cerrar Modal
+        $('#modal-delete').modal('hide');
+        eliminados = "";
     }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
 }
 
+const eliminarCronogramas = (id) => {
+    db.collection("actividades").onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if (id == doc.data().cronograma) {
+                eliminados += `Actividad ${doc.data().nombre} eliminada. \n`;
+                eliminarActividades(doc.id);
+            }
+        })
+    });
+    db.collection("cronogramas").doc(id).delete().then(function () {
+        
+    }).catch(function (error) {
+        console.error("Error elimiando el objeto :", error);
+    });
+}
 
+const eliminarActividades = (idActividad) => {
+    db.collection("actividades").doc(idActividad).delete().then(function () {
+
+    }).catch(function (error) {
+        console.error("Error elimiando el objeto :", error);
+    });
+}
 
 function actualizarModal(id){
     idObra = id;
@@ -199,7 +241,7 @@ function editarObra(){
               // Data saved successfully!
             }
           });
-          Toast.fire({
+        Toast.fire({
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });

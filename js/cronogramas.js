@@ -7,7 +7,7 @@ function cargarSelectObra() {
         querySnapshot.forEach((doc) => {
             const nombre = doc.nombreObra;
             selectObra.innerHTML += `
-            <option>${doc.data().nombre}</option>
+            <option value="${doc.id}">${doc.data().nombre}</option>
             `
         })
 

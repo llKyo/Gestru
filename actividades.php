@@ -22,13 +22,14 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    
+
     <!-- /.content -->
     <section class="content">
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title"><button class="btn btn-success" onclick="cargarSelect()" data-toggle="modal" data-target="#modal-lg">+
+                <h2 class="card-title"><button class="btn btn-success" onclick="cargarSelect()" data-toggle="modal"
+                        data-target="#modal-lg">+
                         Nueva Actividad</button></h2>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -38,6 +39,24 @@
                         title="Remove">
                         <i class="fas fa-times"></i></button>
                 </div>
+                <div class="row text-right">
+                    <div class="col-md-3 ml-auto">
+                        <div class="form-group text-right">
+                            <label for="selectObra" style="margin-top: 0.3rem;">Filtrar por fase</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select id="selectFase" class="form-control"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mr-auto">
+                        <div class="form-group ">
+                            <button class="btn btn-warning form-control text-uppercase font-weight-bold"
+                                onclick="buscarFase()" id="buscarObraBtn">Filtrar</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body p-0">
                 <table class="table table-striped projects">
@@ -46,7 +65,6 @@
                             <th>Actividad</th>
                             <th>Fecha Inicio</th>
                             <th>Fecha Fin</th>
-                            <th>Fase</th>
                             <th>Trabajadores</th>
                             <th style="width: 25%"></th>
                         </tr>
@@ -124,8 +142,8 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess"
-                        onclick="agregarActividad()" id="agregarActividadBtn">Crear</button>
+                    <button type="button" class="btn btn-success swalDefaultSuccess" onclick="agregarActividad()"
+                        id="agregarActividadBtn">Crear</button>
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -196,17 +214,43 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-success swalDefaultSuccess"
-                        onclick="actualizarActividad()" id="agregarActividadBtn">Actualizar</button>
+                    <button type="button" class="btn btn-success swalDefaultSuccess" onclick="actualizarActividad()"
+                        id="agregarActividadBtn">Apachurrale</button>
                 </div>
             </div>
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
+
+        
     </div>
 
 </div>
 <!-- /.content-wrapper -->
+
+<!-- Modal confirmar delete -->
+        <div class="modal fade" id="modal-delete">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">¿Estás seguro?</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- <div class="modal-body">
+              <p>Al eliminar la obra se eliminarán las fases y actividades relacionadas con esta.</p>
+            </div> -->
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-danger" onclick="eliminar()">Eliminar</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!-- Fin Modal confirmar delete -->
 
 
 <?php require_once "templates/footer.php"; ?>
