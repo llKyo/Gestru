@@ -116,9 +116,10 @@
         </div>
       </li> -->
       <li class="nav-item">
-        <a class="nav-link" href="index.php" role="button"><i
-            class="fas fa-sign-out"></i>Desconectar</a>
+        <a class="nav-link btn btn-info text-white font-weight-bold" onclick="cerrarSesion()" role="button">
+        Desconectar</a>
       </li> 
+
     </ul>
   </nav>
   <!-- /.navbar -->

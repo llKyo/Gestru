@@ -30,12 +30,12 @@ const Fn = {
 mostrarTrabajadores();
 
 function registrarTrabajador() {
-    let nombre   = document.querySelector("#nombreTxt");
-    let rut      = document.querySelector("#rutTxt");
+    let nombre = document.querySelector("#nombreTxt");
+    let rut = document.querySelector("#rutTxt");
     let contacto = document.querySelector("#contactoTxt");
-    let email    = document.querySelector("#emailTxt");
-    let rol      = document.querySelector("#rolTxt");
-    let rutFB    = document.querySelector("#rut-feedback");
+    let email = document.querySelector("#emailTxt");
+    let rol = document.querySelector("#rolTxt");
+    let rutFB = document.querySelector("#rut-feedback");
 
     // -------------- VALIDACIONES --------------
 
@@ -60,7 +60,7 @@ function registrarTrabajador() {
         error = true;
         rut.classList.add('is-invalid');
         rutFB.innerText = "Debe ingresar un rut válido";
-    } 
+    }
     if (contacto.value == "") {
         error = true;
         contacto.classList.add('is-invalid');
@@ -141,35 +141,35 @@ function eliminar(id) {
     });
 }
 
-function actualizarModal(id){
+function actualizarModal(id) {
     idTrabajador = id;
- 
+
     db.collection("trabajadores").onSnapshot((querySnapshot) => {
-    
+
         querySnapshot.forEach((doc) => {
             const id = doc.id;
-            if (idTrabajador == id){
+            if (idTrabajador == id) {
                 document.querySelector("#nombreEdit").value = doc.data().nombre;
                 document.querySelector("#rutEdit").value = doc.data().rut;
                 document.querySelector("#emailEdit").value = doc.data().email;
                 document.querySelector("#contactoEdit").value = doc.data().contacto;
                 document.querySelector("#rolEdit").value = doc.data().rol;
             }
-    
+
         })
     });
 
 }
 
-function actualizarTrabajador(){
+function actualizarTrabajador() {
 
-    let id       = idTrabajador;
-    let nombre   = document.querySelector('#nombreEdit');
-    let rut      = document.querySelector('#rutEdit');
-    let email    = document.querySelector('#emailEdit');
+    let id = idTrabajador;
+    let nombre = document.querySelector('#nombreEdit');
+    let rut = document.querySelector('#rutEdit');
+    let email = document.querySelector('#emailEdit');
     let contacto = document.querySelector("#contactoEdit");
-    let rol      = document.querySelector("#rolEdit");
-    let rutFB    = document.querySelector("#rutEdit-feedback");
+    let rol = document.querySelector("#rolEdit");
+    let rutFB = document.querySelector("#rutEdit-feedback");
 
     // -------------- VALIDACIONES --------------
 
@@ -209,26 +209,26 @@ function actualizarTrabajador(){
     }
 
     // -------------- FIN VALIDACIONES --------------
-    if (!error){
+    if (!error) {
         db.collection("trabajadores").doc(id).set({
             nombre: nombre.value,
             rut: rut.value,
             email: email.value,
             contacto: contacto.value,
             rol: rol.value
-          }, function(error) {
+        }, function (error) {
             if (error) {
-              // The write failed...
+                // The write failed...
             } else {
-              // Data saved successfully!
+                // Data saved successfully!
             }
-          });
-          Toast.fire({
+        });
+        Toast.fire({
             icon: 'success',
             title: 'Registro actualizado correctamente.'
         });
         //Cerrar Modal
         $('#modal-edit').modal('hide');
     }
-    
+
 }

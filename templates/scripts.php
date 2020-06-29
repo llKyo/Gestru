@@ -30,5 +30,7 @@
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
 <!-- FIREBASE CONFIGURATION -->
 <script src="js/firebaseConfig.js"></script>
+<script src="js/auth.js"></script>

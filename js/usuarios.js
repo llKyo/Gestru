@@ -2,7 +2,7 @@
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-
+const auth = firebase.auth();
 let nombre;
 
 function registrarUsuario() {
@@ -51,9 +51,9 @@ function registrarUsuario() {
     } else {
         correo = document.querySelector("#correoTxt").value.trim();
     }
-       
-    
-   
+
+
+
     const contrasena = document.getElementById('contrasenaTxt').value;
     if ($('#contrasenaTxt').val().length == 0) {
         alert("Debe ingresar un numero de contraseña")
@@ -71,28 +71,34 @@ function registrarUsuario() {
     const tipo = document.getElementById('tipoSelect').value;
 
 
-    db.collection("usuarios").add({
-        nombre: nombre,
-        rut: rut,
-        contrasena: contrasena,
-        correo: correo,
-        contacto: contacto,
-        tipo: tipo
-    })
-        .then(function (docRef) {
-            console.log("Document written with ID: ", docRef.id);
-            alert("Agregado Correctamente");
-            document.getElementById('nombreTxt').value = '';
-            document.getElementById('rutTxt').value = '';
-            document.getElementById('correoTxt').value = '';
-            document.getElementById('contrasenaTxt').value = '';
-            document.getElementById('contactoTxt').value = '';
-        })
-        .catch(function (error) {
-            console.error("Error adding document: ", error);
-            alert("Ocurrió un Error, Verifique los datos e intente nuevamente")
-        });
+    auth.createUserWithEmailAndPassword(correo, contrasena)
+        .then(userCredential => {
+            console.log("Registro Correcto!!,  db.collection 'usuarios' add");
+            alert("Se registró en tabla USERS")
+        }).then(function () {
+            db.collection("clientes").add({
+                nombre: nombre,
+                rut: rut,
+                correo: correo,
+                contacto: contacto,
+                tipo: tipo
+            })
+                .then(function (docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    alert("Agregado Correctamente a usuarios");
+                    document.getElementById('nombreTxt').value = '';
+                    document.getElementById('rutTxt').value = '';
+                    document.getElementById('correoTxt').value = '';
+                    document.getElementById('contrasenaTxt').value = '';
+                    document.getElementById('contactoTxt').value = '';
+                })
+                .catch(function (error) {
+                    console.error("Error adding document: ", error);
+                    alert("Ocurrió un Error, Verifique los datos e intente nuevamente")
+                });
 
+
+        })
 
 
 
