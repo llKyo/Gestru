@@ -71,9 +71,6 @@
                                 Fecha Fin
                             </th>
                             <th>
-                                Obra
-                            </th>
-                            <th>
                                 Progreso
                             </th>
                             <th style="width: 8%" class="text-center">

@@ -150,6 +150,15 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
+            <a href="./obras.php" class="nav-link">
+              <i class="nav-icon fas fa-tools"></i>
+              <p>
+                Obras
+                <span class="right badge badge-success"></span>
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item">
             <a href="./fases.php" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
               <p>
@@ -159,10 +168,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="./obras.php" class="nav-link">
-              <i class="nav-icon fas fa-tools"></i>
+            <a href="./actividades.php" class="nav-link">
+              <i class="nav-icon fas fa-clipboard-check"></i>
               <p>
-                Obras
+                Actividades
                 <span class="right badge badge-success"></span>
               </p>
             </a>
@@ -172,15 +181,6 @@
               <i class="nav-icon fas fa-user-alt"></i>
               <p>
                 Trabajadores
-                <span class="right badge badge-success"></span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="./actividades.php" class="nav-link">
-              <i class="nav-icon fas fa-clipboard-check"></i>
-              <p>
-                Actividades
                 <span class="right badge badge-success"></span>
               </p>
             </a>

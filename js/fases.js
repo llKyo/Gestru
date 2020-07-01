@@ -128,7 +128,6 @@ db.collection("cronogramas").onSnapshot((querySnapshot) => {
         <td>${doc.data().nombre}</td>
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
-        <td>${doc.data().obra}</td>
         <td class="project_progress">
             <div class="progress progress-sm">
                 <div class="progress-bar bg-green" role="progressbar" aria-valuenow="${progreso}" aria-valuemin="0" aria-valuemax="100" style="width: ${progreso}%">

@@ -7,7 +7,7 @@ function cargarSelectObra() {
         querySnapshot.forEach((doc) => {
             const nombre = doc.nombreObra;
             selectObra.innerHTML += `
-            <option>${doc.data().nombre}</option>
+            <option value="${doc.id}">${doc.data().nombre}</option>
             `
         })
 
@@ -18,7 +18,20 @@ function buscarObra() {
     const obra = document.querySelector('#selectObra').value;
     const table = document.querySelector('#tableObra');
     table.innerHTML = '';
-    db.collection("obras").where("nombre", "==", obra)
+    db.collection("obras").onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            if (obra == doc.id) {
+                table.innerHTML += `
+                <tr>
+                    <td>${doc.data().nombre}</td>
+                    <td>${doc.data().fechaInicio}</td>
+                    <td>${doc.data().fechaTermmino}</td>
+                </tr>`
+            }
+
+        })
+    });
+    /*db.collection("obras").where("ID", "==", obra)
         .get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
@@ -34,7 +47,7 @@ function buscarObra() {
         })
         .catch(function (error) {
             console.log("Error getting documents: ", error);
-        });
+        });*/
 
     buscarFase();
 
