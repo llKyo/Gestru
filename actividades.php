@@ -131,9 +131,9 @@
                             <div class="form-group">
                                 <label for="finTxt">Trabajadores Asociados</label>
                                 <select name="" class="form-control" id="trabajadorSelect">
-                                    <option value="juan">juan</option>
+                                    <!--<option value="juan">juan</option>
                                     <option value="momo">momo</option>
-                                    <option value="chan">chan</option>
+                                    <option value="chan">chan</option>-->
                                 </select>
                             </div>
                         </div>
@@ -202,9 +202,9 @@
                             <div class="form-group">
                                 <label for="finTxt">Trabajadores Asociados</label>
                                 <select name="" class="form-control" id="trabajadorSelectEdit">
-                                    <option value="juan">juan</option>
+                                    <!--<option value="juan">juan</option>
                                     <option value="momo">momo</option>
-                                    <option value="chan">chan</option>
+                                    <option value="chan">chan</option>-->
                                     <div class="invalid-feedback">Debe ingresar un trabajador</div>
                                 </select>
                             </div>
@@ -215,7 +215,7 @@
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" class="btn btn-success swalDefaultSuccess" onclick="actualizarActividad()"
-                        id="agregarActividadBtn">Apachurrale</button>
+                        id="agregarActividadBtn">Actualizar</button>
                 </div>
             </div>
             <!-- /.modal-content -->

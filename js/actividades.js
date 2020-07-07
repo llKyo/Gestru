@@ -17,7 +17,21 @@ const trabajador = document.querySelector("#trabajadorSelect");
 let inicioFB = document.querySelector("#inicio-feedback");
 let finFB = document.querySelector("#fin-feedback");
 
+cargarSelectTrabajadores();
 
+function cargarSelectTrabajadores() {
+    const selectTrabajador = document.querySelector("#trabajadorSelect");
+    db.collection("clientes").onSnapshot((querySnapshot) => {
+        selectTrabajador.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            //const nombre = doc.nombreObra;
+            selectTrabajador.innerHTML += `
+            <option value="${doc.data().nombre}">${doc.data().nombre}</option>
+            `
+        })
+
+    })
+}
 
 function limpiarModalAgregar() {
     nombre.classList.remove('is-invalid');
@@ -89,7 +103,8 @@ function agregarActividad() {
             fechaInicio: inicio.value,
             fechaTermmino: fin.value,
             cronograma: cronograma.value,
-            trabajador: trabajador.value
+            trabajador: trabajador.value,
+            estado: "En ejecución"
         })
         .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
@@ -189,6 +204,19 @@ function actualizarModal(id) {
         })
 
     });
+
+    let selectTrabajador = document.querySelector("#trabajadorSelectEdit");
+    db.collection("clientes").onSnapshot((querySnapshot) => {
+        selectTrabajador.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            //const nombre = doc.nombreObra;
+            selectTrabajador.innerHTML += `
+            <option value="${doc.data().nombre}">${doc.data().nombre}</option>
+            `
+        })
+
+    })
+
 }
 
 function actualizarActividad() {
