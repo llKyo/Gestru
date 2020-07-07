@@ -34,3 +34,5 @@
 <!-- FIREBASE CONFIGURATION -->
 <script src="js/firebaseConfig.js"></script>
 <script src="js/auth.js"></script>
+<script src="js/momentjs.min.js"></script>
+<script src="js/moment-timezone-with-data.js"></script>

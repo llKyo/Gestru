@@ -28,7 +28,7 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title"><button class="btn btn-success" data-toggle="modal" data-target="#modal-lg" 
-                    onclick="limpiarModalAgregar()">+ Nueva Obra</button></h2>
+                    onclick="limpiarModalAgregar(),setearFechas()">+ Nueva Obra</button></h2>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -198,5 +198,5 @@
 
 <script src='js/obras.js'></script>
 
-</body>
+</body >
 </html>

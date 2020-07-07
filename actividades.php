@@ -28,7 +28,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title"><button class="btn btn-success" onclick="cargarSelect()" data-toggle="modal"
+                <h2 class="card-title"><button class="btn btn-success" onclick="cargarSelect(), setearFechas()" data-toggle="modal"
                         data-target="#modal-lg">+
                         Nueva Actividad</button></h2>
                 <div class="card-tools">
@@ -85,7 +85,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" onclick="limpiarModalAgregar()">Crear nueva actividad</h4>
+                    <h4 class="modal-title" onclick="limpiarModalAgregar() ">Crear nueva actividad</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

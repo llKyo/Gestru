@@ -23,6 +23,9 @@ function cargarSelectObra() {
 
     })
 }
+const nombre = document.querySelector('#nombreTxt');
+const inicio = document.querySelector("#inicioTxt");
+const fin = document.querySelector('#finTxt');
 
 function limpiarModalAgregar() {
     const nombre = document.querySelector('#nombreTxt');
@@ -38,12 +41,23 @@ function limpiarModalAgregar() {
     fin.value = "";
 }
 
+function setearFechas() {
+    let hoy = moment().format('YYYY-MM-DD');
+    inicio.min = hoy;
+    inicio.value = hoy;
+    fin.value = hoy;
+    fin.min = hoy;
+
+    inicio.addEventListener('change', () => {
+        fin.min = inicio.value;
+        fin.value = inicio.value;
+    })
+}
+
 
 //AGREGAR CRONOGRAMA
 function agregarCronograma() {
-    const nombre = document.querySelector('#nombreTxt');
-    const inicio = document.querySelector("#inicioTxt");
-    const fin = document.querySelector('#finTxt');
+
     const estado = document.querySelector("#selectEstado").value;
     const obra = document.querySelector("#selectObra").value;
     let inicioFB = document.querySelector("#inicio-feedback");
@@ -92,23 +106,23 @@ function agregarCronograma() {
 
 
     db.collection("cronogramas").add({
-        nombre: nombre.value.trim(),
-        fechaInicio: inicio.value,
-        fechaTermmino: fin.value,
-        estado: estado,
-        obra: obra
-    })
-        .then(function (docRef) {
+            nombre: nombre.value.trim(),
+            fechaInicio: inicio.value,
+            fechaTermmino: fin.value,
+            estado: estado,
+            obra: obra
+        })
+        .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
             Toast.fire({
                 icon: 'success',
                 title: '  Fase agregada correctamente.'
             });
-            document.querySelector('#nombreTxt').value = '';
-            document.querySelector('#inicioTxt').value = '';
-            document.querySelector('#finTxt').value = '';
+            nombre.value = '';
+            inicio.value = '';
+            fin.value = '';
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.error("Error adding document: ", error);
         });
 
@@ -228,7 +242,7 @@ function editarFase() {
             fechaTermmino: fin.value,
             estado: estado,
             obra: obra
-        }, function (error) {
+        }, function(error) {
             if (error) {
                 // The write failed...
             } else {
@@ -255,7 +269,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
     boton.innerHTML = 'Guardar';
     select = document.querySelector("#selectEstado");
     select.removeAttribute("disabled");
-    boton.onclick = function () {
+    boton.onclick = function() {
         console.log("Entrando a funcion Guardar")
         let cronoEdit = db.collection("cronogramas").doc(id);
         let nombre = document.querySelector("#nombreTxt").value.trim();
@@ -282,7 +296,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
             fechaTermmino: fin,
             estado: estado,
             obra: obra
-        }).then(function () {
+        }).then(function() {
             console.log("Documento actualizado");
             boton.innerHTML = 'Agregar';
             alert("Cronograma Actualizado");
@@ -290,7 +304,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
             document.querySelector("#inicioTxt").value = "";
             document.querySelector("#finTxt").value = "";
 
-        }).catch(function (error) {
+        }).catch(function(error) {
             console.log("no se actualizó correctamente", error);
         })
 
@@ -311,24 +325,24 @@ function eliminar() {
             }
         })
     });
-    db.collection("cronogramas").doc(id).delete().then(function () {
+    db.collection("cronogramas").doc(id).delete().then(function() {
         Toast.fire({
             icon: 'success',
             title: 'Fase y sus respectivas actividades borrada correctamente.'
         });
         //Cerrar Modal
         $('#modal-delete').modal('hide');
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 
 }
 
 function eliminarActividades(idActividad) {
-    db.collection("actividades").doc(idActividad).delete().then(function () {
+    db.collection("actividades").doc(idActividad).delete().then(function() {
 
         console.log("Documento borrado Correctamente.");
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 }

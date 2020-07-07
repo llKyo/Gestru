@@ -6,11 +6,15 @@ const Toast = Swal.mixin({
     showConfirmButton: false,
     timer: 3000
 });
+const nombre = document.querySelector('#nombreTxt');
+const inicio = document.querySelector("#fechaInicioTxt");
+const fin = document.querySelector('#fechaTerminoTxt');
+let inicioFB = document.querySelector("#inicio-feedback");
+let finFB = document.querySelector("#fin-feedback");
 
-function limpiarModalAgregar(){
-    const nombre = document.querySelector('#nombreTxt');
-    const inicio = document.querySelector("#fechaInicioTxt");
-    const fin    = document.querySelector('#fechaTerminoTxt');
+
+
+function limpiarModalAgregar() {
 
     nombre.classList.remove('is-invalid');
     inicio.classList.remove('is-invalid');
@@ -18,15 +22,29 @@ function limpiarModalAgregar(){
 
     nombre.value = "";
     inicio.value = "";
-    fin.value    = "";
+    fin.value = "";
+}
+
+function setearFechas() {
+
+    let hoy = moment().format('YYYY-MM-DD');
+    inicio.min = hoy;
+    inicio.value = hoy;
+    fin.value = hoy;
+    fin.min = hoy;
+    console.log(hoy);
+    inicio.addEventListener('change', () => {
+        fin.min = inicio.value;
+        fin.value = inicio.value;
+    })
 }
 
 function agregarObra() {
-    const nombre = document.querySelector('#nombreTxt');
-    const inicio = document.querySelector('#fechaInicioTxt');
-    const fin    = document.querySelector('#fechaTerminoTxt');
-    let inicioFB = document.querySelector("#inicio-feedback");
-    let finFB    = document.querySelector("#fin-feedback");
+    /*     const nombre = document.querySelector('#nombreTxt');
+        const inicio = document.querySelector('#fechaInicioTxt'); */
+    /*  const fin = document.querySelector('#fechaTerminoTxt');
+     let inicioFB = document.querySelector("#inicio-feedback");
+     let finFB = document.querySelector("#fin-feedback"); */
 
     // -------------- VALIDACIONES --------------
 
@@ -69,11 +87,11 @@ function agregarObra() {
     // -------------- FIN VALIDACIONES --------------
 
     db.collection("obras").add({
-        nombre: nombre.value,
-        fechaInicio: inicio.value,
-        fechaTermmino: fin.value,
-    })
-        .then(function (docRef) {
+            nombre: nombre.value,
+            fechaInicio: inicio.value,
+            fechaTermmino: fin.value,
+        })
+        .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
             Toast.fire({
                 icon: 'success',
@@ -83,10 +101,10 @@ function agregarObra() {
             document.querySelector('#fechaInicioTxt').value = '';
             document.querySelector('#fechaInicioTxt').value = '';
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.error("Error adding document: ", error);
         });
-    
+
     //Cerrar Modal
     $('#modal-lg').modal('hide');
 }
@@ -132,7 +150,7 @@ const eliminar = () => {
             }
         })
     });
-    db.collection("obras").doc(id).delete().then(function () {
+    db.collection("obras").doc(id).delete().then(function() {
         eliminados += `Obra eliminada.`;
         Toast.fire({
             icon: 'success',
@@ -141,7 +159,7 @@ const eliminar = () => {
         //Cerrar Modal
         $('#modal-delete').modal('hide');
         eliminados = "";
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 }
@@ -155,48 +173,48 @@ const eliminarCronogramas = (id) => {
             }
         })
     });
-    db.collection("cronogramas").doc(id).delete().then(function () {
-        
-    }).catch(function (error) {
+    db.collection("cronogramas").doc(id).delete().then(function() {
+
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 }
 
 const eliminarActividades = (idActividad) => {
-    db.collection("actividades").doc(idActividad).delete().then(function () {
+    db.collection("actividades").doc(idActividad).delete().then(function() {
 
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 }
 
-function actualizarModal(id){
+function actualizarModal(id) {
     idObra = id;
- 
+
     db.collection("obras").onSnapshot((querySnapshot) => {
-    
+
         querySnapshot.forEach((doc) => {
             const id = doc.id;
-            if (idObra == id){
+            if (idObra == id) {
                 document.querySelector("#nombreEdit").value = doc.data().nombre;
                 document.querySelector("#fechaInicioEdit").value = doc.data().fechaInicio;
                 document.querySelector("#fechaFinEdit").value = doc.data().fechaTermmino;
             }
-    
+
         })
     });
 }
 
 
-function editarObra(){
+function editarObra() {
 
-    let id       = idObra;
-    let nombre   = document.querySelector('#nombreEdit');
-    let inicio   = document.querySelector('#fechaInicioEdit');
-    let fin      = document.querySelector('#fechaFinEdit');
+    let id = idObra;
+    /*  let nombre = document.querySelector('#nombreEdit');
+    let inicio = document.querySelector('#fechaInicioEdit');
+    let fin = document.querySelector('#fechaFinEdit');
     let inicioFB = document.querySelector("#inicioEdit-feedback");
-    let finFB    = document.querySelector("#finEdit-feedback");
-
+    let finFB = document.querySelector("#finEdit-feedback");
+ */
 
     inicioFB.innerText = "";
     finFB.innerText = "";
@@ -229,18 +247,18 @@ function editarObra(){
         inicioFB.innerText += "La fecha de término debe ser mayor a la de inicio";
     }
 
-    if (!error){
+    if (!error) {
         db.collection("obras").doc(id).set({
             nombre: nombre.value,
             fechaInicio: inicio.value,
             fechaTermmino: fin.value
-          }, function(error) {
+        }, function(error) {
             if (error) {
-              // The write failed...
+                // The write failed...
             } else {
-              // Data saved successfully!
+                // Data saved successfully!
             }
-          });
+        });
         Toast.fire({
             icon: 'success',
             title: 'Registro actualizado correctamente.'
@@ -248,9 +266,5 @@ function editarObra(){
         //Cerrar Modal
         $('#modal-edit').modal('hide');
     }
-    
+
 }
-    
-
-
-

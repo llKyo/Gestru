@@ -8,11 +8,18 @@ const Toast = Swal.mixin({
 });
 
 
-function limpiarModalAgregar() {
-    const nombre = document.querySelector('#nombreTxt');
-    const inicio = document.querySelector("#inicioTxt");
-    const fin = document.querySelector('#finTxt');
+/* Variables de inputs */
+const nombre = document.querySelector("#nombreTxt");
+const inicio = document.querySelector("#inicioTxt");
+const fin = document.querySelector('#finTxt');
+const cronograma = document.querySelector('#cronogramaSelect');
+const trabajador = document.querySelector("#trabajadorSelect");
+let inicioFB = document.querySelector("#inicio-feedback");
+let finFB = document.querySelector("#fin-feedback");
 
+
+
+function limpiarModalAgregar() {
     nombre.classList.remove('is-invalid');
     inicio.classList.remove('is-invalid');
     fin.classList.remove('is-invalid');
@@ -22,18 +29,21 @@ function limpiarModalAgregar() {
     fin.value = "";
 }
 
-//AGREGAR Actividad
+function setearFechas() {
+
+    let hoy = moment().format('YYYY-MM-DD');
+    inicio.min = hoy;
+    inicio.value = hoy;
+    fin.value = hoy;
+    fin.min = hoy;
+    inicio.addEventListener('change', () => {
+        fin.min = inicio.value;
+        fin.value = inicio.value;
+    })
+}
+setearFechas();
+/* Agregar Actividad */
 function agregarActividad() {
-    const nombre = document.querySelector('#nombreTxt');
-    const inicio = document.querySelector('#inicioTxt');
-    const fin = document.querySelector('#finTxt');
-    const cronograma = document.querySelector('#cronogramaSelect');
-    const trabajador = document.querySelector("#trabajadorSelect");
-    let inicioFB = document.querySelector("#inicio-feedback");
-    let finFB = document.querySelector("#fin-feedback");
-
-
-    // -------------- VALIDACIONES --------------
 
     inicioFB.innerText = "";
     finFB.innerText = "";
@@ -41,7 +51,7 @@ function agregarActividad() {
     inicio.classList.remove('is-invalid');
     fin.classList.remove('is-invalid');
 
-
+    // -------------- VALIDACIONES --------------
     let error = false;
 
     if (nombre.value.length == 0) {
@@ -75,13 +85,13 @@ function agregarActividad() {
 
 
     db.collection("actividades").add({
-        nombre: nombre.value,
-        fechaInicio: inicio.value,
-        fechaTermmino: fin.value,
-        cronograma: cronograma.value,
-        trabajador: trabajador.value
-    })
-        .then(function (docRef) {
+            nombre: nombre.value,
+            fechaInicio: inicio.value,
+            fechaTermmino: fin.value,
+            cronograma: cronograma.value,
+            trabajador: trabajador.value
+        })
+        .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
             Toast.fire({
                 icon: 'success',
@@ -91,7 +101,7 @@ function agregarActividad() {
             document.querySelector('#inicioTxt').value = '';
             document.querySelector('#finTxt').value = '';
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.error("Error adding document: ", error);
         });
 
@@ -125,7 +135,7 @@ const addIdModalEliminar = (id) => idEliminar = id;
 //Borrar Actividad
 function eliminar(id) {
     id = idEliminar;
-    db.collection("actividades").doc(id).delete().then(function () {
+    db.collection("actividades").doc(id).delete().then(function() {
         Toast.fire({
             icon: 'success',
             title: 'Actividad borrada correctamente.'
@@ -133,7 +143,7 @@ function eliminar(id) {
         //Cerrar Modal
         $('#modal-delete').modal('hide');
         console.log("Documento borrado Correctamente.");
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 }
@@ -235,7 +245,7 @@ function actualizarActividad() {
             fechaTermmino: fin.value,
             cronograma: fase.value,
             trabajador: trabajador.value
-        }, function (error) {
+        }, function(error) {
             if (error) {
                 // The write failed...
             } else {

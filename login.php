@@ -19,7 +19,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
-                    <a href="index.html" class="btn btn-success">Crear Cuenta</a>
+                    <a href="registroCliente.php" class="btn btn-success">Crear Cuenta</a>
                 </li>
 
             </ul>

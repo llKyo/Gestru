@@ -1,4 +1,3 @@
-
 //cargar Selects
 function cargarSelectObra() {
     const selectObra = document.querySelector("#selectObra");
@@ -13,12 +12,22 @@ function cargarSelectObra() {
 
     })
 }
+const nombre = document.querySelector('#nombreTxt');
+const inicio = document.querySelector("#fechaInicioTxt");
+const fin = document.querySelector('#fechaTerminoTxt');
+
+
+
+
+
+
+
 
 
 //AGREGAR CRONOGRAMA
 function agregarCronograma() {
-    let nombre = document.querySelector('#nombreTxt').value.trim();
-    if ($('#nombreTxt').val().length == 0) {
+
+    if (nombre.value.length == 0) {
         alert('Debe ingresar un nombre');
         return false;
     }
@@ -39,20 +48,20 @@ function agregarCronograma() {
 
     let obra = document.querySelector("#selectObra").value;
     db.collection("cronogramas").add({
-        nombre: nombre,
-        fechaInicio: inicio,
-        fechaTermmino: fin,
-        estado: estado,
-        obra: obra
-    })
-        .then(function (docRef) {
+            nombre: nombre,
+            fechaInicio: inicio,
+            fechaTermmino: fin,
+            estado: estado,
+            obra: obra
+        })
+        .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
             alert("Cronograma Agregado Correctamente");
-            document.querySelector('#nombreTxt').value = '';
-            document.querySelector('#inicioTxt').value = '';
-            document.querySelector('#finTxt').value = '';
+            nombre.value = '';
+            inicio.value = '';
+            fin.value = '';
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.error("Error adding document: ", error);
         });
 }
@@ -88,7 +97,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
     boton.innerHTML = 'Guardar';
     select = document.querySelector("#selectEstado");
     select.removeAttribute("disabled");
-    boton.onclick = function () {
+    boton.onclick = function() {
         console.log("Entrando a funcion Guardar")
         let cronoEdit = db.collection("cronogramas").doc(id);
         let nombre = document.querySelector("#nombreTxt").value.trim();
@@ -115,7 +124,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
             fechaTermmino: fin,
             estado: estado,
             obra: obra
-        }).then(function () {
+        }).then(function() {
             console.log("Documento actualizado");
             boton.innerHTML = 'Agregar';
             alert("Cronograma Actualizado");
@@ -123,7 +132,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
             document.querySelector("#inicioTxt").value = "";
             document.querySelector("#finTxt").value = "";
 
-        }).catch(function (error) {
+        }).catch(function(error) {
             console.log("no se actualizó correctamente", error);
         })
 
@@ -132,10 +141,10 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
 }
 //Borrar Cronograma
 function eliminar(id) {
-    db.collection("cronogramas").doc(id).delete().then(function () {
+    db.collection("cronogramas").doc(id).delete().then(function() {
         console.log("Documento borrado Correctamente");
 
-    }).catch(function (error) {
+    }).catch(function(error) {
         console.error("Error elimiando el objeto :", error);
     });
 }
