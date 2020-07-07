@@ -6,9 +6,21 @@ function iniciarSesion() {
     const contrasena = document.querySelector('#contrasenaTxt').value;
     auth.signInWithEmailAndPassword(correo, contrasena)
         .then(userCredential => {
-            alert("Ingreso Correcto");
-            location.href = 'home.php';
-        }).catch(function (error) {
+            db.collection("clientes").onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().correo == correo) {
+                        alert("cliente");
+                        location.href = "clientes.php";
+                    } else {
+                        alert("jefe");
+                        location.href = "home.php";
+                    }
+                })
+            })
+
+
+
+        }).catch(function(error) {
             console.error("Error adding document: ", error);
             alert("Credenciales no registradas, Verifique Datos")
         });

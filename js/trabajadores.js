@@ -1,3 +1,28 @@
+/* const user = firebase.auth().currentUser;
+
+firebase.auth().onAuthStateChanged(function(user) {
+    console.log(user);
+    if (!user) {
+        // User is not signed in.
+        location.href = 'index.php';
+        alert("no está autenticado");
+
+
+    } else {
+        // User is  signed in.
+        db.collection("clientes").onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (doc.data().correo == user.email) {
+                    location.href = 'clientes.php';
+                } else {
+                    location.href = 'trabajadores.php'; //Remplazr href
+                }
+            })
+
+        })
+    }
+});
+ */
 let idTrabajador;
 
 const Toast = Swal.mixin({
@@ -9,7 +34,7 @@ const Toast = Swal.mixin({
 //SCRIPT VALIDADOR DE RUT
 const Fn = {
     // Valida el rut con su cadena completa "XXXXXXXX-X"
-    validaRut: function (rutCompleto) {
+    validaRut: function(rutCompleto) {
         if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto))
             return false;
         let tmp = rutCompleto.split('-');
@@ -18,8 +43,9 @@ const Fn = {
         if (digv == 'K') digv = 'k';
         return (Fn.dv(rut) == digv);
     },
-    dv: function (T) {
-        let M = 0, S = 1;
+    dv: function(T) {
+        let M = 0,
+            S = 1;
         for (; T; T = Math.floor(T / 10))
             S = (S + T % 10 * (9 - M++ % 6)) % 11;
         return S ? S - 1 : 'k';
@@ -78,20 +104,20 @@ function registrarTrabajador() {
 
     if (!error) {
         db.collection("trabajadores").add({
-            nombre: nombre.value.trim(),
-            rut: rut.value.trim(),
-            contacto: contacto.value.trim(),
-            email: email.value.trim(),
-            rol: rol.value.trim()
-        })
-            .then(function (docRef) {
+                nombre: nombre.value.trim(),
+                rut: rut.value.trim(),
+                contacto: contacto.value.trim(),
+                email: email.value.trim(),
+                rol: rol.value.trim()
+            })
+            .then(function(docRef) {
                 console.log("Document written with ID: ", docRef.id);
                 Toast.fire({
                     icon: 'success',
                     title: 'Trabajador registrado correctamente.'
                 });
             })
-            .catch(function (error) {
+            .catch(function(error) {
                 console.error("Error adding document: ", error);
                 Toast.fire({
                     icon: 'error',
@@ -127,12 +153,12 @@ function mostrarTrabajadores() {
 }
 
 function eliminar(id) {
-    db.collection("trabajadores").doc(id).delete().then(function () {
+    db.collection("trabajadores").doc(id).delete().then(function() {
         Toast.fire({
             icon: 'warning',
             title: 'Trabajador eliminado correctamente.'
         });
-    }).catch(function (error) {
+    }).catch(function(error) {
         Toast.fire({
             icon: 'error',
             title: 'A ocurrido un error'
@@ -216,7 +242,7 @@ function actualizarTrabajador() {
             email: email.value,
             contacto: contacto.value,
             rol: rol.value
-        }, function (error) {
+        }, function(error) {
             if (error) {
                 // The write failed...
             } else {

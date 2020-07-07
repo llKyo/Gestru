@@ -12,7 +12,7 @@
 <body >
 <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Gestru</a>
+            <a class="navbar-brand" href="index.php">Gestru</a>
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item ">
@@ -28,7 +28,7 @@
         <div class="col-6 mx-auto py-4">
             <div class="card">
                 <div class="card-header text-center bg-dark text-white">
-                    <h4>Registrese en Gestru</h4>
+                    <p class="display-4">Registrese en Gestru</p>
 
                 </div>
                 <div class="card-body text-dark">
@@ -45,7 +45,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="correoTxt">Correo</label>
-                                <input type="text" id="correoTxt" class="form-control" required>
+                                <input type="text" placeholder="email.example@hotmail.com" id="correoTxt" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -56,15 +56,6 @@
                             <div class="form-group">
                                 <label for="contactoTxt">Contacto</label>
                                 <input type="text" id="contactoTxt" class="form-control" placeholder="Solo 8 numeros">
-                            </div>
-                            <div class="form-group">
-                                <label for="selectTipo">Tipo de Usuario</label>
-                                <select class="form-control" id="tipoSelect">
-                                    <option value="seleccione" cheked>Seleccione</option>
-                                    <option value="jefe">Jefe de Obra</option>
-                                    <option value="cliente">Cliente</option>
-                                    <option value="trabajador">Trabajador</option>
-                                </select>
                             </div>
                         </div>
                     </div>

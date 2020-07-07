@@ -1,3 +1,13 @@
+/* firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) {
+        // User is not signed in.
+        location.href = 'index.php';
+        alert("no está autenticado");
+
+
+    }
+});
+ */
 let idFase;
 
 const Toast = Swal.mixin({

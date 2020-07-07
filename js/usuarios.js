@@ -1,3 +1,12 @@
+/* firebase.auth().onAuthStateChanged(function(user) {
+    if (!user) {
+        // User is not signed in.
+        location.href = 'index.php';
+        alert("no está autenticado");
+
+
+    }
+}); */
 let nombre = document.querySelector("#nombreTxt");
 let correo = document.querySelector("#correoTxt");
 let rut = document.querySelector("#rutTxt");
@@ -29,7 +38,7 @@ function registrarCliente() {
 
 
     if (!Fn.validaRut(rut.value.trim())) {
-        alert("cagó el rut");
+        alert("Verifique Rut");
         return false;
     }
 
@@ -64,7 +73,6 @@ function registrarCliente() {
     auth.createUserWithEmailAndPassword(correo.value.trim(), contrasena.value.trim())
         .then(userCredential => {
             console.log("Registro Correcto!!,  db.collection 'CLIENTES' add");
-            alert("Se registró en tabla CLIENTES");
         }).then(function() {
             db.collection("clientes").add({
                     nombre: nombre.value,
@@ -74,7 +82,8 @@ function registrarCliente() {
                 })
                 .then(function(docRef) {
                     console.log("Document written with ID: ", docRef.id);
-                    alert("Agregado Correctamente a usuarios");
+                    alert("Se ha Registrado correctamente como Cliente");
+                    location.href = 'login.php';
                     document.getElementById('nombreTxt').value = '';
                     document.getElementById('rutTxt').value = '';
                     document.getElementById('correoTxt').value = '';
@@ -88,103 +97,5 @@ function registrarCliente() {
 
 
         })
-
-}
-
-function registrarUsuario() {
-    /*    const nombre = document.getElementById('nombreTxt').value;
-       if (nombre.length >= 35) 
-       {
-           alert("Sólo se permite de 35 letras para el nombre")
-           return false;
-       }
-       
-       else if (/^\s+$/.test(nombre)) 
-       {
-           return true;    
-       }
-       
-       
-       else if($('#nombreTxt').val().length == 0){
-         alert('Debe ingresar su nombre y apellido');
-          return false;
-       } */
-
-    if (document.querySelector("#nombreTxt").value.trim() == "") {
-        alert("debe ingresar Nombre");
-        return false;
-    } else {
-        nombre = document.getElementById('nombreTxt').value.trim();
-    }
-
-
-    const rut = document.getElementById('rutTxt').value;
-
-    /* 
-        const correo = document.getElementById('correoTxt').value;
-        expresion = /\w+@\w+\.+[a-z]/;
-    
-             if(!expresion.test(correo)){
-                alert("El correo no es valido");
-                return false;
-    
-        } */
-
-    expresion = /\w+@\w+\.+[a-z]/;
-    if (!expresion.test(document.querySelector("#correoTxt").value.trim())) {
-        alert("Debe ingresar un correo válido");
-        return false;
-    } else {
-        correo = document.querySelector("#correoTxt").value.trim();
-    }
-
-
-
-    const contrasena = document.getElementById('contrasenaTxt').value;
-    if ($('#contrasenaTxt').val().length == 0) {
-        alert("Debe ingresar un numero de contraseña")
-        return false;
-    }
-    const contacto = document.getElementById('contactoTxt').value;
-    if (contacto.length > 9) {
-        alert("Maximo 9 numeros")
-        return false;
-    } else if ($('#contactoTxt').val().length == 0) {
-        alert("Debe ingresar un numero de contacto");
-        return false;
-    }
-    const tipo = document.getElementById('tipoSelect').value;
-
-
-    auth.createUserWithEmailAndPassword(correo, contrasena)
-        .then(userCredential => {
-            console.log("Registro Correcto!!,  db.collection 'usuarios' add");
-            alert("Se registró en tabla USERS")
-        }).then(function() {
-            db.collection("clientes").add({
-                    nombre: nombre,
-                    rut: rut,
-                    correo: correo,
-                    contacto: contacto,
-                    tipo: tipo
-                })
-                .then(function(docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                    alert("Agregado Correctamente a usuarios");
-                    document.getElementById('nombreTxt').value = '';
-                    document.getElementById('rutTxt').value = '';
-                    document.getElementById('correoTxt').value = '';
-                    document.getElementById('contrasenaTxt').value = '';
-                    document.getElementById('contactoTxt').value = '';
-                })
-                .catch(function(error) {
-                    console.error("Error adding document: ", error);
-                    alert("Ocurrió un Error, Verifique los datos e intente nuevamente")
-                });
-
-
-        })
-
-
 
 }

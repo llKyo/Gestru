@@ -1,3 +1,28 @@
+const user = firebase.auth().currentUser;
+
+firebase.auth().onAuthStateChanged(function(user) {
+    console.log(user);
+    if (!user) {
+        // User is not signed in.
+        location.href = 'index.php';
+        alert("no está autenticado");
+
+
+    } else {
+        // User is  signed in.
+        db.collection("clientes").onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                if (doc.data().correo == user.email) {
+                    location.href = 'clientes.php';
+                } else {
+                    location.href = 'obras.php'; //Remplazr href
+                }
+            })
+
+        })
+    }
+});
+
 let idObra;
 
 const Toast = Swal.mixin({
@@ -6,13 +31,25 @@ const Toast = Swal.mixin({
     showConfirmButton: false,
     timer: 3000
 });
-const nombre = document.querySelector('#nombreTxt');
-const inicio = document.querySelector("#fechaInicioTxt");
-const fin = document.querySelector('#fechaTerminoTxt');
+let nombre = document.querySelector('#nombreTxt');
+let inicio = document.querySelector("#fechaInicioTxt");
+let fin = document.querySelector('#fechaTerminoTxt');
 let inicioFB = document.querySelector("#inicio-feedback");
 let finFB = document.querySelector("#fin-feedback");
+let selectTrabajador = document.querySelector("#selectCliente");
 
+function cargarSelectTrabajadores() {
+    db.collection("clientes").onSnapshot((querySnapshot) => {
+        selectTrabajador.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            selectTrabajador.innerHTML += `
+            <option value="${doc.data().correo}" >NOMBRE: "${doc.data().nombre}" RUT: "${doc.data().rut}" </option>
+            `
+        })
 
+    })
+}
+cargarSelectTrabajadores();
 
 function limpiarModalAgregar() {
 
@@ -83,13 +120,17 @@ function agregarObra() {
     if (error) {
         return false;
     }
-
+    if (selectTrabajador.value == "") {
+        selectTrabajador.classList.add("is-invalid");
+        return false;
+    }
     // -------------- FIN VALIDACIONES --------------
 
     db.collection("obras").add({
             nombre: nombre.value,
             fechaInicio: inicio.value,
             fechaTermmino: fin.value,
+            clienteAsociado: selectTrabajador.value
         })
         .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
@@ -120,9 +161,11 @@ db.collection("obras").onSnapshot((querySnapshot) => {
         <td>${doc.data().nombre}</td>
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
+        <td>${doc.data().clienteAsociado}</td>
         <td class="project-state text-center">
             <span class="badge badge-success">Estado</span>
         </td>
+       
         <td class="project-actions text-center">
         <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
         <a class="btn btn-danger text-white btn-md" data-toggle="modal" data-target="#modal-delete" 

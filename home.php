@@ -31,6 +31,7 @@
 
 <?php require_once "templates/footer.php"; ?>
 <?php require_once "templates/scripts.php"; ?>
+<script src="js/home.js"></script>
 
 </body>
 </html>

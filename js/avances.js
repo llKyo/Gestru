@@ -1,3 +1,39 @@
+/* let flag;
+
+function autenticar() {
+    const user = firebase.auth().currentUser;
+    firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user);
+        if (!user) {
+            // User is not signed in.
+            location.href = 'index.php';
+            alert("no está autenticado");
+
+
+        } else {
+            // User is  signed in.
+            db.collection("clientes").onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().correo == user.email) {
+                        flag = true;
+                        console.log("iterando");
+                        return false; //Remplazr href
+                    } else {
+                        flag = false;
+                    }
+                })
+                console.log(flag)
+                if (flag) {
+
+                } else {
+                    location.href = "home.php"
+                }
+            })
+        }
+    });
+}
+
+autenticar(); */
 cargarSelectObra();
 
 function cargarSelectObra() {
@@ -60,8 +96,8 @@ function buscarFase() {
     table.innerHTML = '';
     db.collection("cronogramas").where("obra", "==", obra)
         .get()
-        .then(function (querySnapshot) {
-            querySnapshot.forEach(function (doc) {
+        .then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
                 // doc.data() is never undefined for query doc snapshots
                 console.log(doc.id, " => ", doc.data());
                 table.innerHTML += `
@@ -73,7 +109,7 @@ function buscarFase() {
             </tr>`
             });
         })
-        .catch(function (error) {
+        .catch(function(error) {
             console.log("Error getting documents: ", error);
         });
 }

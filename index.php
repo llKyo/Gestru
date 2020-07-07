@@ -41,9 +41,9 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li class="nav-item"><a class="active nav-link scrollto" href="#about">Inicio</a></li>                                          
-                        <li class="nav-item"><a class="nav-link scrollto" href="#pricing">Precios</a></li>
                         <li class="nav-item"><a class="nav-link scrollto" href="#contact">Contáctanos</a></li>
                         <li class="nav-item"><a class="nav-link " href="login.php">Iniciar Sesión</a></li>
+                        <li class="nav-item"><a class="nav-link " href="registroCliente.php">Registrese</a></li>
                     </ul><!--//nav-->
                 </div><!--//navabr-collapse-->
             </nav><!--//main-nav-->                     
