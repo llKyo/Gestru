@@ -1,13 +1,39 @@
 let nombre = document.querySelector("#nombreTxt");
-const correo = document.querySelector("#correoTxt");
+let correo = document.querySelector("#correoTxt");
 let rut = document.querySelector("#rutTxt");
-const contrasena = document.querySelector("#contrasenaTxt");
+let contrasena = document.querySelector("#contrasenaTxt");
 let contacto = document.querySelector("#contactoTxt");
 let tipoUsuario = document.querySelector("#tipoSelect")
 
-console.log("aa");
+const Fn = {
+    // Valida el rut con su cadena completa "XXXXXXXX-X"
+    validaRut: function(rutCompleto) {
+        if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test(rutCompleto))
+            return false;
+        let tmp = rutCompleto.split('-');
+        let digv = tmp[1];
+        let rut = tmp[0];
+        if (digv == 'K') digv = 'k';
+        return (Fn.dv(rut) == digv);
+    },
+    dv: function(T) {
+        let M = 0,
+            S = 1;
+        for (; T; T = Math.floor(T / 10))
+            S = (S + T % 10 * (9 - M++ % 6)) % 11;
+        return S ? S - 1 : 'k';
+    }
+}
 
 function registrarCliente() {
+
+
+    if (!Fn.validaRut(rut.value.trim())) {
+        alert("cagó el rut");
+        return false;
+    }
+
+
 
     if (nombre.value.length >= 35) {
         alert("Sólo se permite de 35 letras para el nombre")
@@ -18,42 +44,7 @@ function registrarCliente() {
         return false;
     }
 
-    let rut = document.querySelector("#rutTxt").value.trim();
-    let valor = rut.replace('.', '');
-    // Despejar Guión
-    valor = valor.replace('-', '');
-    // Aislar Cuerpo y Dígito Verificador
-    cuerpo = valor.slice(0, -1);
-    dv = valor.slice(-1).toUpperCase();
-    // Formatear RUN
-    rut = cuerpo + '-' + dv
-        // Si no cumple con el mínimo ej. (n.nnn.nnn)
-    if (cuerpo.length < 7) {
 
-        alert("Rut incompleto");
-        return false;
-    }
-    // Calcular Dígito Verificador
-    suma = 0;
-    multiplo = 2;
-    // Para cada dígito del Cuerpo
-    for (i = 1; i <= cuerpo.length; i++) {
-        // Obtener su Producto con el Múltiplo Correspondiente
-        index = multiplo * valor.charAt(cuerpo.length - i);
-        // Sumar al Contador General
-        suma = suma + index;
-        // Consolidar Múltiplo dentro del rango [2,7]
-        if (multiplo < 7) { multiplo = multiplo + 1; } else { multiplo = 2; }
-    }
-    // Calcular Dígito Verificador en base al Módulo 11
-    dvEsperado = 11 - (suma % 11);
-    // Casos Especiales (0 y K)
-    dv = (dv == 'K') ? 10 : dv;
-    dv = (dv == 0) ? 11 : dv;
-    // Validar que el Cuerpo coincide con su Dígito Verificador
-    if (dvEsperado != dv) { alert("Rut invalido"); return false; }
-    // Si todo sale bien, eliminar errores (decretar que es válido)
-    const rutValidado = rut;
 
 
     expresion = /\w+@\w+\.+[a-z]/;
@@ -70,17 +61,16 @@ function registrarCliente() {
         return false;
     }
     console.log("Pasó validacion")
-    auth.createUserWithEmailAndPassword(correo, contrasena)
+    auth.createUserWithEmailAndPassword(correo.value.trim(), contrasena.value.trim())
         .then(userCredential => {
-            console.log("Registro Correcto!!,  db.collection 'usuarios' add");
-            alert("Se registró en tabla USERS")
+            console.log("Registro Correcto!!,  db.collection 'CLIENTES' add");
+            alert("Se registró en tabla CLIENTES");
         }).then(function() {
             db.collection("clientes").add({
                     nombre: nombre.value,
                     rut: rut.value,
                     correo: correo.value,
                     contacto: contacto.value,
-                    tipo: tipo.value
                 })
                 .then(function(docRef) {
                     console.log("Document written with ID: ", docRef.id);
