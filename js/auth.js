@@ -1,6 +1,34 @@
 const auth = firebase.auth();
 
 
+function autenticar() {
+    firebase.auth().onAuthStateChanged(function(user) {
+        console.log(user);
+        if (!user) {
+            // User is not signed in.
+            location.href = 'index.php';
+            alert("no está autenticado");
+
+
+        } else {
+            // User is  signed in.
+            db.collection("clientes").onSnapshot((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    if (doc.data().correo == user.email) {
+
+                        if (location.pathname != "/Gestru/clientes.php") {
+                            location.href = "clientes.php";
+                        }
+                    } else {
+
+                    }
+                })
+
+            })
+        }
+    });
+}
+
 function iniciarSesion() {
     const correo = document.querySelector('#correoTxt').value;
     const contrasena = document.querySelector('#contrasenaTxt').value;
@@ -8,12 +36,12 @@ function iniciarSesion() {
         .then(userCredential => {
             db.collection("clientes").onSnapshot((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    if (doc.data().correo == correo) {
-                        alert("cliente");
+                    if (correo == doc.data().correo) {
                         location.href = "clientes.php";
+
                     } else {
-                        alert("jefe");
                         location.href = "home.php";
+
                     }
                 })
             })

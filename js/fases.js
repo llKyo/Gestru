@@ -1,13 +1,5 @@
-/* firebase.auth().onAuthStateChanged(function(user) {
-    if (!user) {
-        // User is not signed in.
-        location.href = 'index.php';
-        alert("no está autenticado");
+autenticar();
 
-
-    }
-});
- */
 let idFase;
 
 const Toast = Swal.mixin({
@@ -81,7 +73,7 @@ function agregarCronograma() {
     nombre.classList.remove('is-invalid');
     inicio.classList.remove('is-invalid');
     fin.classList.remove('is-invalid');
-
+    document.querySelector("#selectObra").remove("is-invalid");
 
     let error = false;
 
@@ -111,7 +103,10 @@ function agregarCronograma() {
     if (error) {
         return false;
     }
-
+    if (obra == "") {
+        document.querySelector("#selectObra").classList.add("is-invalid");
+        return false;
+    }
     // -------------- FIN VALIDACIONES --------------
 
 

@@ -1,29 +1,4 @@
-/* const user = firebase.auth().currentUser;
-
-firebase.auth().onAuthStateChanged(function(user) {
-    console.log(user);
-    if (!user) {
-        // User is not signed in.
-        location.href = 'index.php';
-        alert("no está autenticado");
-
-
-    } else {
-        // User is  signed in.
-        db.collection("clientes").onSnapshot((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                if (doc.data().correo == user.email) {
-                    location.href = 'clientes.php';
-                } else {
-                    location.href = 'actividades.php'; //Remplazr href
-                }
-            })
-
-        })
-    }
-});
- */
-
+autenticar();
 
 let idActividad;
 
@@ -48,7 +23,7 @@ cargarSelectTrabajadores();
 
 function cargarSelectTrabajadores() {
     const selectTrabajador = document.querySelector("#trabajadorSelect");
-    db.collection("clientes").onSnapshot((querySnapshot) => {
+    db.collection("trabajadores").onSnapshot((querySnapshot) => {
         selectTrabajador.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             //const nombre = doc.nombreObra;
@@ -82,7 +57,12 @@ function setearFechas() {
         fin.value = inicio.value;
     })
 }
+
 setearFechas();
+
+
+
+
 /* Agregar Actividad */
 function agregarActividad() {
 
@@ -91,7 +71,8 @@ function agregarActividad() {
     nombre.classList.remove('is-invalid');
     inicio.classList.remove('is-invalid');
     fin.classList.remove('is-invalid');
-
+    cronograma.classList.remove('is-invalid');
+    trabajador.classList.remove('is-invalid');
     // -------------- VALIDACIONES --------------
     let error = false;
 
@@ -123,7 +104,14 @@ function agregarActividad() {
     }
 
     // -------------- FIN VALIDACIONES --------------
-
+    if (cronograma.value == "") {
+        cronograma.classList.add("is-invalid");
+        return false;
+    }
+    if (trabajador.value == "") {
+        trabajador.classList.add("is-invalid");
+        return false;
+    }
 
     db.collection("actividades").add({
             nombre: nombre.value,

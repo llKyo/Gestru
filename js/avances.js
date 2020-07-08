@@ -1,39 +1,4 @@
-/* let flag;
-
-function autenticar() {
-    const user = firebase.auth().currentUser;
-    firebase.auth().onAuthStateChanged(function(user) {
-        console.log(user);
-        if (!user) {
-            // User is not signed in.
-            location.href = 'index.php';
-            alert("no está autenticado");
-
-
-        } else {
-            // User is  signed in.
-            db.collection("clientes").onSnapshot((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    if (doc.data().correo == user.email) {
-                        flag = true;
-                        console.log("iterando");
-                        return false; //Remplazr href
-                    } else {
-                        flag = false;
-                    }
-                })
-                console.log(flag)
-                if (flag) {
-
-                } else {
-                    location.href = "home.php"
-                }
-            })
-        }
-    });
-}
-
-autenticar(); */
+autenticar();
 cargarSelectObra();
 
 function cargarSelectObra() {

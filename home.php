@@ -24,10 +24,17 @@
     <!-- /.content-header -->
 
 
-
+    <div class="card bg-dark">
+            <div class="card-header">
+                <h2 class="card-title  text-white"><p class="display-4">Bienvenido a Gestru</p></button></h2>
+                
+                </div>
+            </div>
+           
 </div>
 <!-- /.content-wrapper -->
 
+ 
 
 <?php require_once "templates/footer.php"; ?>
 <?php require_once "templates/scripts.php"; ?>
