@@ -19,8 +19,6 @@ function autenticar() {
                         if (location.pathname != "/Gestru/clientes.php") {
                             location.href = "clientes.php";
                         }
-                    } else {
-
                     }
                 })
 
