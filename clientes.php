@@ -124,7 +124,7 @@
 <?php require_once "templates/footer.php"; ?>
 <?php require_once "templates/scripts.php"; ?>
 
-<script src="js/avances.js"></script>
+<script src="js/estadoObra.js"></script>
 
 </body>
 
