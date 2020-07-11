@@ -4,6 +4,7 @@ const auth = firebase.auth();
 function autenticar() {
     firebase.auth().onAuthStateChanged(function(user) {
         console.log(user);
+        console.log("ahora");
         if (!user) {
             // User is not signed in.
             location.href = 'index.php';
