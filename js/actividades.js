@@ -196,22 +196,7 @@ function cargarSelect() {
 
 function actualizarModal(id) {
     idActividad = id;
-
-    db.collection("actividades").onSnapshot((querySnapshot) => {
-
-        querySnapshot.forEach((doc) => {
-            const id = doc.id;
-            if (idActividad == id) {
-                document.querySelector("#nombreEdit").value = doc.data().nombre;
-                document.querySelector("#inicioEdit").value = doc.data().fechaInicio;
-                document.querySelector("#finEdit").value = doc.data().fechaTermmino;
-                console.log(doc.data().estado);
-                document.querySelector("#estadoSelectEdit").value = doc.data().estado;
-            }
-
-        })
-    });
-
+    
     let select = document.querySelector("#cronogramaSelectEdit");
     db.collection("cronogramas").onSnapshot((querySnapshot) => {
         select.innerHTML = ``;
@@ -222,6 +207,23 @@ function actualizarModal(id) {
         })
 
     });
+
+    db.collection("actividades").onSnapshot((querySnapshot) => {
+
+        querySnapshot.forEach((doc) => {
+            const id = doc.id;
+            if (idActividad == id) {
+                document.querySelector("#nombreEdit").value = doc.data().nombre;
+                document.querySelector("#inicioEdit").value = doc.data().fechaInicio;
+                document.querySelector("#finEdit").value = doc.data().fechaTermmino;
+                document.querySelector("#estadoSelectEdit").value = doc.data().estado;
+                document.querySelector("#cronogramaSelectEdit").value = doc.data().cronograma;
+            }
+
+        })
+    });
+
+    
 
     let selectTrabajador = document.querySelector("#trabajadorSelectEdit");
     db.collection("clientes").onSnapshot((querySnapshot) => {
