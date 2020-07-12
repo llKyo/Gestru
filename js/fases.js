@@ -156,14 +156,14 @@ db.collection("cronogramas").onSnapshot((querySnapshot) => {
             .catch(err => {
                 console.log('Error getting documents', err);
             });
-        let progreso;
-        if (act != 0) {
-            progreso = Math.trunc(completado * 100 / act);
-        } else {
-            progreso = 0;
-        }
+        
         setTimeout(() => {
-            
+            let progreso;
+            if (act != 0) {
+                progreso = Math.trunc(completado * 100 / act);
+            } else {
+                progreso = 0;
+            }
             console.log(progreso);
             select = document.querySelector("#selectEstado");
             table.innerHTML += `
