@@ -66,6 +66,7 @@
                             <th>Fecha Inicio</th>
                             <th>Fecha Fin</th>
                             <th>Trabajadores</th>
+                            <th style="width: 10%">Estado</th>
                             <th style="width: 25%"></th>
                         </tr>
                     </thead>
@@ -189,18 +190,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3 ml-auto">
-                            <div class="form-group">
-                                <label for="finTxt">Fase Asociada</label>
-                                <select name="" class="form-control" id="cronogramaSelectEdit">
-                                    <!--<option value="crono 1">CRONO 1</option>
-                                    <option value="crono 2">crono 2</option>
-                                    <option value="crono 3">crono 3</option>-->
-                                </select>
-                            </div>
+                            <label for="estadoSelectEdit">Estado</label>
+                                <select name="" class="form-control" id="estadoSelectEdit">
+                                    <option value="En ejecución">En ejecución</option>
+                                    <option value="Terminado">Terminado</option>
+                                
+                            </select>
                         </div>
                         <div class="col-md-3 mr-auto ">
                             <div class="form-group">
-                                <label for="finTxt">Trabajadores Asociados</label>
+                                <label for="trabajadorSelectEdit">Trabajadores Asociados</label>
                                 <select name="" class="form-control" id="trabajadorSelectEdit">
                                     <!--<option value="juan">juan</option>
                                     <option value="momo">momo</option>
@@ -210,7 +209,18 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row">
+                        <div class="col-md-6 mx-auto">
+                            <div class="form-group">
+                                <label for="finTxt">Fase Asociada</label>
+                                <select name="" class="form-control" id="cronogramaSelectEdit">
+                                    <!--<option value="crono 1">CRONO 1</option>
+                                    <option value="crono 2">crono 2</option>
+                                    <option value="crono 3">crono 3</option>-->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

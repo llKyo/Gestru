@@ -111,13 +111,13 @@ function agregarCronograma() {
 
 
     db.collection("cronogramas").add({
-            nombre: nombre.value.trim(),
-            fechaInicio: inicio.value,
-            fechaTermmino: fin.value,
-            estado: estado,
-            obra: obra
-        })
-        .then(function(docRef) {
+        nombre: nombre.value.trim(),
+        fechaInicio: inicio.value,
+        fechaTermmino: fin.value,
+        estado: estado,
+        obra: obra
+    })
+        .then(function (docRef) {
             console.log("Document written with ID: ", docRef.id);
             Toast.fire({
                 icon: 'success',
@@ -127,7 +127,7 @@ function agregarCronograma() {
             inicio.value = '';
             fin.value = '';
         })
-        .catch(function(error) {
+        .catch(function (error) {
             console.error("Error adding document: ", error);
         });
 
@@ -140,30 +140,55 @@ const table = document.querySelector('#tableCronogramas')
 db.collection("cronogramas").onSnapshot((querySnapshot) => {
     table.innerHTML = '';
     querySnapshot.forEach((doc) => {
-        const id = doc.id;
-        select = document.querySelector("#selectEstado");
-        table.innerHTML += `
-        <tr>
-        <td>${doc.data().nombre}</td>
-        <td>${doc.data().fechaInicio}</td>
-        <td>${doc.data().fechaTermmino}</td>
-        <td class="project_progress">
-            <div class="progress progress-sm">
-                <div class="progress-bar bg-green" role="progressbar" aria-valuenow="${progreso}" aria-valuemin="0" aria-valuemax="100" style="width: ${progreso}%">
-                </div>
-            </div>
-            <small>
-                ${progreso}% Completado
-            </small>
-        </td>
-        <td class="project-state text-center">
-            <span class="badge badge-success">${doc.data().estado}</span>
-        </td>
-        <td class="project-actions text-center">
-        <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
-        <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
-        </td>
-        </tr>`
+        let id = doc.id;
+        let completado = 0;
+        let act = 0;
+        let actividadesRef = db.collection('actividades').where('cronograma', '==', id);
+        actividadesRef.get()
+            .then(snapshot => {
+                snapshot.forEach(doc => {
+                    act += 1;
+                    if (doc.data().estado == "Terminado") {
+                        completado += 1;
+                    }
+                });
+            })
+            .catch(err => {
+                console.log('Error getting documents', err);
+            });
+        let progreso;
+        if (act != 0) {
+            progreso = Math.trunc(completado * 100 / act);
+        } else {
+            progreso = 0;
+        }
+        setTimeout(() => {
+            
+            console.log(progreso);
+            select = document.querySelector("#selectEstado");
+            table.innerHTML += `
+                <tr>
+                <td>${doc.data().nombre}</td>
+                <td>${doc.data().fechaInicio}</td>
+                <td>${doc.data().fechaTermmino}</td>
+                <td class="project_progress">
+                    <div class="progress progress-sm">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="${progreso}" aria-valuemin="0" aria-valuemax="100" style="width: ${progreso}%">
+                        </div>
+                    </div>
+                    <small>
+                        ${progreso}% Completado
+                    </small>
+                </td>
+                <td class="project-state text-center">
+                    <span class="badge badge-success">${progreso == 100 ? "Terminado" : "En ejecución"}</span>
+                </td>
+                <td class="project-actions text-center">
+                <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
+                <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
+                </td>
+                </tr>`
+        }, 500);
     });
 });
 
@@ -247,7 +272,7 @@ function editarFase() {
             fechaTermmino: fin.value,
             estado: estado,
             obra: obra
-        }, function(error) {
+        }, function (error) {
             if (error) {
                 // The write failed...
             } else {
@@ -274,7 +299,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
     boton.innerHTML = 'Guardar';
     select = document.querySelector("#selectEstado");
     select.removeAttribute("disabled");
-    boton.onclick = function() {
+    boton.onclick = function () {
         console.log("Entrando a funcion Guardar")
         let cronoEdit = db.collection("cronogramas").doc(id);
         let nombre = document.querySelector("#nombreTxt").value.trim();
@@ -301,7 +326,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
             fechaTermmino: fin,
             estado: estado,
             obra: obra
-        }).then(function() {
+        }).then(function () {
             console.log("Documento actualizado");
             boton.innerHTML = 'Agregar';
             alert("Cronograma Actualizado");
@@ -309,7 +334,7 @@ function editar(id, nombre, fechaInicio, fechaTermmino, estado, obra, select) {
             document.querySelector("#inicioTxt").value = "";
             document.querySelector("#finTxt").value = "";
 
-        }).catch(function(error) {
+        }).catch(function (error) {
             console.log("no se actualizó correctamente", error);
         })
 
@@ -330,24 +355,24 @@ function eliminar() {
             }
         })
     });
-    db.collection("cronogramas").doc(id).delete().then(function() {
+    db.collection("cronogramas").doc(id).delete().then(function () {
         Toast.fire({
             icon: 'success',
             title: 'Fase y sus respectivas actividades borrada correctamente.'
         });
         //Cerrar Modal
         $('#modal-delete').modal('hide');
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
 
 }
 
 function eliminarActividades(idActividad) {
-    db.collection("actividades").doc(idActividad).delete().then(function() {
+    db.collection("actividades").doc(idActividad).delete().then(function () {
 
         console.log("Documento borrado Correctamente.");
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.error("Error elimiando el objeto :", error);
     });
 }

@@ -150,6 +150,7 @@ db.collection("actividades").onSnapshot((querySnapshot) => {
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
         <td>${doc.data().trabajador}</td>
+        <td> <span class="badge badge-success">${doc.data().estado}</span></td>
         <td class="project-actions text-center">
         <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
         <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
@@ -204,6 +205,8 @@ function actualizarModal(id) {
                 document.querySelector("#nombreEdit").value = doc.data().nombre;
                 document.querySelector("#inicioEdit").value = doc.data().fechaInicio;
                 document.querySelector("#finEdit").value = doc.data().fechaTermmino;
+                console.log(doc.data().estado);
+                document.querySelector("#estadoSelectEdit").value = doc.data().estado;
             }
 
         })
@@ -241,6 +244,7 @@ function actualizarActividad() {
     let inicio = document.querySelector('#inicioEdit');
     let fin = document.querySelector('#finEdit');
     let fase = document.querySelector("#cronogramaSelectEdit");
+    let estado = document.querySelector("#estadoSelectEdit");
     let trabajador = document.querySelector("#trabajadorSelectEdit");
     let inicioFB = document.querySelector("#inicioEdit-feedback");
     let finFB = document.querySelector("#finEdit-feedback");
@@ -287,7 +291,8 @@ function actualizarActividad() {
             fechaInicio: inicio.value,
             fechaTermmino: fin.value,
             cronograma: fase.value,
-            trabajador: trabajador.value
+            trabajador: trabajador.value,
+            estado: estado.value
         }, function(error) {
             if (error) {
                 // The write failed...
