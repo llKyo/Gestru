@@ -57,8 +57,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <table class="table table-striped">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-hover text-nowrap">
                     <thead>
                         <tr>
                             <th>

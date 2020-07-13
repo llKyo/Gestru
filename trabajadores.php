@@ -39,8 +39,8 @@
                         <i class="fas fa-times"></i></button>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <table class="table table-striped projects">
+            <div class="card-body table-responsive p-0">
+                <table class="table table-striped projects table-hover text-nowrap">
                     <thead>
                         <tr>
                             <th>
