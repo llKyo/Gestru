@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 ml-auto">
+                        <!-- <div class="col-md-3 ml-auto">
                             <div class="form-group">
                                 <label for="selectEstado">Estado</label>
                                 <select id="selectEstado" class="form-control">
@@ -138,8 +138,8 @@
                                     <option value="Finalizado">Finalizado</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-3 mr-auto ">
+                        </div> -->
+                        <div class="col-md-6 mx-auto ">
                             <div class="form-group">
                                 <label for="selectObra">Obra asociada</label>
                                 <select id="selectObra" class="form-control"></select>
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3 ml-auto">
+                        <!-- <div class="col-md-3 ml-auto">
                             <div class="form-group">
                                 <label for="selectEstado">Estado</label>
                                 <select id="selectEstadoModal" class="form-control">
@@ -205,8 +205,8 @@
                                     <option value="Finalizado">Finalizado</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-3 mr-auto ">
+                        </div> -->
+                        <div class="col-md-6 mx-auto ">
                             <div class="form-group">
                                 <label for="selectObra">Obra asociada</label>
                                 <select id="selectObraModal" class="form-control"></select>

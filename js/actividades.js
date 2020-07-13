@@ -27,6 +27,7 @@ function cargarSelectTrabajadores() {
         selectTrabajador.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             //const nombre = doc.nombreObra;
+            console.log(doc.data().nombre);
             selectTrabajador.innerHTML += `
             <option value="${doc.data().nombre}">${doc.data().nombre}</option>
             `
@@ -186,7 +187,7 @@ function cargarSelect() {
         select.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             select.innerHTML += `
-            <option value="${doc.id}">${doc.data().nombre}</option>
+            <option value="${doc.data().nombre}">${doc.data().nombre}</option>
             `
         })
 
@@ -218,6 +219,7 @@ function actualizarModal(id) {
                 document.querySelector("#finEdit").value = doc.data().fechaTermmino;
                 document.querySelector("#estadoSelectEdit").value = doc.data().estado;
                 document.querySelector("#cronogramaSelectEdit").value = doc.data().cronograma;
+                document.querySelector("#trabajadorSelectEdit").value = doc.data().trabajador;
             }
 
         })
@@ -226,7 +228,7 @@ function actualizarModal(id) {
     
 
     let selectTrabajador = document.querySelector("#trabajadorSelectEdit");
-    db.collection("clientes").onSnapshot((querySnapshot) => {
+    db.collection("trabajadores").onSnapshot((querySnapshot) => {
         selectTrabajador.innerHTML = ``;
         querySnapshot.forEach((doc) => {
             //const nombre = doc.nombreObra;

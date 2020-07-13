@@ -67,7 +67,6 @@
                                 <th>Nombre</th>
                                 <th>Fecha Inicio</th>
                                 <th>Fecha Fin</th>
-                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody id="tableObra">

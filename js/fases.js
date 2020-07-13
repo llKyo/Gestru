@@ -60,7 +60,7 @@ function setearFechas() {
 //AGREGAR CRONOGRAMA
 function agregarCronograma() {
 
-    const estado = document.querySelector("#selectEstado").value;
+    // const estado = document.querySelector("#selectEstado").value;
     const obra = document.querySelector("#selectObra").value;
     let inicioFB = document.querySelector("#inicio-feedback");
     let finFB = document.querySelector("#fin-feedback");
@@ -114,7 +114,7 @@ function agregarCronograma() {
         nombre: nombre.value.trim(),
         fechaInicio: inicio.value,
         fechaTermmino: fin.value,
-        estado: estado,
+        // estado: estado,
         obra: obra
     })
         .then(function (docRef) {
@@ -227,7 +227,7 @@ function editarFase() {
     const nombre = document.querySelector('#nombreEdit');
     const inicio = document.querySelector('#inicioEdit');
     const fin = document.querySelector('#finEdit');
-    const estado = document.querySelector("#selectEstadoModal").value;
+    // const estado = document.querySelector("#selectEstadoModal").value;
     const obra = document.querySelector("#selectObraModal").value;
     let inicioFB = document.querySelector("#inicioEdit-feedback");
     let finFB = document.querySelector("#finEdit-feedback");
@@ -270,7 +270,7 @@ function editarFase() {
             nombre: nombre.value,
             fechaInicio: inicio.value,
             fechaTermmino: fin.value,
-            estado: estado,
+            // estado: estado,
             obra: obra
         }, function (error) {
             if (error) {

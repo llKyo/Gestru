@@ -65,24 +65,48 @@ function buscarObra() {
 
 
 }
-
 function buscarFase() {
     const obra = document.querySelector('#selectObra').value;
+    const progreso = 0;
     const table = document.querySelector('#tableFase');
     table.innerHTML = '';
     db.collection("cronogramas").where("obra", "==", obra)
         .get()
         .then(function(querySnapshot) {
             querySnapshot.forEach(function(doc) {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
+                let completado = 0;
+                let act = 0;
+                let actividadesRef = db.collection('actividades').where('cronograma', '==', doc.id);
+                actividadesRef.get()
+                    .then(snapshot => {
+                        snapshot.forEach(doc => {
+                            act += 1;
+                            if (doc.data().estado == "Terminado") {
+                                completado += 1;
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log('Error getting documents', err);
+                    });
+
+                setTimeout(() => {
+                    let progreso;
+                    if (act != 0) {
+                        progreso = Math.trunc(completado * 100 / act);
+                    } else {
+                        progreso = 0;
+                    }
+
                 table.innerHTML += `
             <tr>
                 <td>${doc.data().nombre}</td>
                 <td>${doc.data().fechaInicio}</td>
                 <td>${doc.data().fechaTermmino}</td>
-                <td>${doc.data().estado}</td>
+                <td>${progreso == 100 ? "Terminado" : "En ejecución"}</td>
+                <td></td>
             </tr>`
+                }, 500);
             });
         })
         .catch(function(error) {
