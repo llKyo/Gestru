@@ -11,6 +11,7 @@ let nombre = document.querySelector("#nombreTxt");
 let correo = document.querySelector("#correoTxt");
 let rut = document.querySelector("#rutTxt");
 let contrasena = document.querySelector("#contrasenaTxt");
+let contrasenaRep = document.querySelector("#contrasenaRepTxt");
 let contacto = document.querySelector("#contactoTxt");
 let tipoUsuario = document.querySelector("#tipoSelect")
 
@@ -37,11 +38,6 @@ const Fn = {
 function registrarCliente() {
 
 
-    if (!Fn.validaRut(rut.value.trim())) {
-        alert("Verifique Rut");
-        return false;
-    }
-
 
 
     if (nombre.value.length >= 35) {
@@ -53,18 +49,27 @@ function registrarCliente() {
         return false;
     }
 
-
-
-
     expresion = /\w+@\w+\.+[a-z]/;
     if (!expresion.test(correo.value.trim())) {
         alert("Debe ingresar un correo válido");
         return false;
     }
+    
+    if (!Fn.validaRut(rut.value.trim())) {
+        alert("Verifique Rut");
+        return false;
+    }
+
     if (contrasena.value.trim().length == 0) {
         alert("Debe ingresar un numero de contraseña")
         return false;
     }
+
+    if(contrasenaRep.value.trim() != contrasena.value){
+        alert("Las contraseñas deben coincidir");
+        return false;
+    }
+
     if (contacto.value.trim().length != 8) {
         alert("Ingrese un contacto válido");
         return false;

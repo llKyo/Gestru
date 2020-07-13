@@ -10,7 +10,7 @@
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Registro de un nuevo cliente</p>
 
-                <form action="../../index.html" method="post">
+                
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Nombre" id="nombreTxt">
                         <div class="input-group-append">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Rut" id="rutTxt">
+                        <input type="text" class="form-control" placeholder="Rut" id="rutTxt">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Contacto" id="contactoTxt">
+                        <input type="text" class="form-control " placeholder="Contacto" id="contactoTxt">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -66,7 +66,7 @@
                         </div>
                         <!-- /.col -->
                     </div>
-                </form>
+                
 
                 <div class="social-auth-links text-center">
                     <p>- O -</p>
