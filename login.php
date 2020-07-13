@@ -1,64 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require_once "templates/header.php"; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de sesion</title>
+<body class="hold-transition login-page" style="background-image: url(img/fondo-login.jpg)">
+    <div class="login-box">
+        <div class="login-logo" style="font-size: 30px; color: white;">
+            <h1><b>Ges</b>tru</h1>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                <p class="login-box-msg" style="font-size: 20px;">Inicio de sesión</p>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
-
-</head>
-
-<body>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">Gestru</a>
-
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                    <a href="registroCliente.php" class="btn btn-success">Crear Cuenta</a>
-                </li>
-
-            </ul>
-            </div>
-        </nav>
-    </header>
-
-    <section class="main-section">
-        <div class="background-overlay py-4 ">
-            <div class="container">
-                <div class="row ">
-                    <div class="col-6 mx-auto">
-                        <!--  <form action="registroUsuario"> -->
-                        <div class="card">
-                            <div class="card-header text-center text-white bg-dark">
-                                <h4>Iniciar Sesion</h4>
-
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="correoTxt">Correo</label>
-                                    <input type="email" id="correoTxt" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="contrasenaTxt">Contraseña</label>
-                                    <input type="password" id="contrasenaTxt" class="form-control">
-                                </div>
-                                <button class="btn btn-success form-control" onclick="iniciarSesion()">Ingresar
-                                    Credenciales</button>
-                            </div>
+                <div class="input-group mb-3">
+                    <input type="email" class="form-control" placeholder="Correo" id="correoTxt">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Contraseña" id="contrasenaTxt">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block" onclick="iniciarSesion()">Iniciar Sesión</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="social-auth-links text-center mb-3">
+                    <p>- O -</p>
+                    <p>¿No tienes cuenta?</p>
+                    <a href="registroCliente.php" class="btn btn-block btn-danger">
+                        Registrate
+                    </a>
+                </div>
+                <p class="mb-1">
+                    <a href="index.php">Volver al inicio</a>
+                </p>
             </div>
+            <!-- /.login-card-body -->
         </div>
-    </section>
+    </div>
+    <!-- /.login-box -->
 
 
-   
     <?php require_once "templates/scripts.php"; ?>
 
 </body>

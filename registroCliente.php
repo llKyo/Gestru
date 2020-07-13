@@ -1,81 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php require_once "templates/header.php"; ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Cliente</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-</head>
-
-<body >
-<header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.php">Gestru</a>
-
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                    <a href="login.php" class="btn btn-primary">Iniciar Sesión</a>
-                </li>
-
-            </ul>
-            </div>
-        </nav>
-    </header>
-
-    <div class="row ">
-        <div class="col-6 mx-auto py-4">
-            <div class="card">
-                <div class="card-header text-center bg-dark text-white">
-                    <p class="display-4">Registrese en Gestru</p>
-
-                </div>
-                <div class="card-body text-dark">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nombreTxt">Nombre</label>
-                                <input type="text" id="nombreTxt" required class="form-control" placeholder="Ingrese Nombre y Apellido">
-                            </div>
-                            <div class="form-group">
-                                <label for="rutTxt">Rut</label>
-                                <input type="text" id="rutTxt" name="rut" placeholder="Ingrese RUT" class="form-control">
-
-                            </div>
-                            <div class="form-group">
-                                <label for="correoTxt">Correo</label>
-                                <input type="text" placeholder="email.example@hotmail.com" id="correoTxt" class="form-control" required>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="contrasenaTxt">Contraseña</label>
-                                <input type="password" id="contrasenaTxt" placeholder="de 4 o mas caracteres" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="contactoTxt">Contacto</label>
-                                <input type="text" id="contactoTxt" class="form-control" placeholder="Solo 8 numeros">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group py-2">
-                        <button class="btn btn-outline-primary form-control" onclick="registrarCliente()" id="registrarUsuarioBtn">Registrarse</button>
-                    </div>
-                </div>
-
-            </div>
+<body class="hold-transition register-page" style="background-image: url(img/fondo-login.jpg)">
+    <div class="register-box">
+        <div class="register-logo" style="font-size: 30px; color: white;">
+            <h1><b>Ges</b>tru</h1>
         </div>
 
+        <div class="card">
+            <div class="card-body register-card-body">
+                <p class="login-box-msg">Registro de un nuevo cliente</p>
+
+                <form action="../../index.html" method="post">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Nombre" id="nombreTxt">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Correo" id="correoTxt">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Rut" id="rutTxt">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="email" class="form-control" placeholder="Contacto" id="contactoTxt">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Constraseña" id="contrasenaTxt">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control" placeholder="Repita la contraseña" id="contrasenaRepTxt">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block" onclick="registrarCliente()" id="registrarUsuarioBtn">Registrarme</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+                <div class="social-auth-links text-center">
+                    <p>- O -</p>
+                    <p>¿Ya tienes cuenta?</p>
+                    <a href="login.php" class="btn btn-block btn-danger">Iniciar sesión</a>
+                </div>
+
+                <a href="index.php" class="text-center">Volver al inicio</a>
+            </div>
+            <!-- /.form-box -->
+        </div><!-- /.card -->
     </div>
-
-
-
-
+    <!-- /.register-box -->
 
 
     <?php require_once "templates/scripts.php"; ?>
     <script src="js/usuarios.js"></script>
+
 </body>
 
 </html>
