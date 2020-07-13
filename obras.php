@@ -167,6 +167,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <div class="form-group">
+                         <label for="">Cliente Asociado</label>
+                            <select  class="form-control text-uppercase" id="selectClienteEdit">
+                            
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

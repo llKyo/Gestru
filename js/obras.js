@@ -13,6 +13,7 @@ let fin = document.querySelector('#fechaTerminoTxt');
 let inicioFB = document.querySelector("#inicio-feedback");
 let finFB = document.querySelector("#fin-feedback");
 let selectTrabajador = document.querySelector("#selectCliente");
+let selectTrabajadorEdit = document.querySelector("#selectClienteEdit");
 
 function cargarSelectTrabajadores() {
     db.collection("clientes").onSnapshot((querySnapshot) => {
@@ -26,6 +27,19 @@ function cargarSelectTrabajadores() {
     })
 }
 cargarSelectTrabajadores();
+
+function cargarSelectTrabajadoresEdit() {
+    db.collection("clientes").onSnapshot((querySnapshot) => {
+        selectTrabajadorEdit.innerHTML = ``;
+        querySnapshot.forEach((doc) => {
+            selectTrabajadorEdit.innerHTML += `
+            <option value="${doc.data().correo}" >NOMBRE: "${doc.data().nombre}" RUT: "${doc.data().rut}" </option>
+            `
+        })
+
+    })
+}
+cargarSelectTrabajadoresEdit();
 
 function limpiarModalAgregar() {
 
@@ -214,6 +228,7 @@ function actualizarModal(id) {
                 document.querySelector("#nombreEdit").value = doc.data().nombre;
                 document.querySelector("#fechaInicioEdit").value = doc.data().fechaInicio;
                 document.querySelector("#fechaFinEdit").value = doc.data().fechaTermmino;
+                document.querySelector('#selectClienteEdit').value = doc.data().clienteAsociado;
             }
 
         })
@@ -224,12 +239,13 @@ function actualizarModal(id) {
 function editarObra() {
 
     let id = idObra;
-    /*  let nombre = document.querySelector('#nombreEdit');
+    let nombre = document.querySelector('#nombreEdit');
     let inicio = document.querySelector('#fechaInicioEdit');
+    let cliente = document.querySelector('#selectClienteEdit');
     let fin = document.querySelector('#fechaFinEdit');
     let inicioFB = document.querySelector("#inicioEdit-feedback");
     let finFB = document.querySelector("#finEdit-feedback");
- */
+
 
     inicioFB.innerText = "";
     finFB.innerText = "";
@@ -266,7 +282,8 @@ function editarObra() {
         db.collection("obras").doc(id).set({
             nombre: nombre.value,
             fechaInicio: inicio.value,
-            fechaTermmino: fin.value
+            fechaTermmino: fin.value,
+            clienteAsociado: cliente.value
         }, function(error) {
             if (error) {
                 // The write failed...
