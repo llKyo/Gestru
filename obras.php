@@ -55,9 +55,6 @@
                             <th>
                                 Cliente Asociado
                             </th>
-                            <th style="width: 8%" class="text-center">
-                                Estado
-                            </th>
                             <th style="width: 20%">
                             </th>
                             

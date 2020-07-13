@@ -138,10 +138,6 @@ db.collection("obras").onSnapshot((querySnapshot) => {
         <td>${doc.data().fechaInicio}</td>
         <td>${doc.data().fechaTermmino}</td>
         <td>${doc.data().clienteAsociado}</td>
-        <td class="project-state text-center">
-            <span class="badge badge-success">Estado</span>
-        </td>
-       
         <td class="project-actions text-center">
         <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
         <a class="btn btn-danger text-white btn-md" data-toggle="modal" data-target="#modal-delete" 
