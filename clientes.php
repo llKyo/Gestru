@@ -2,7 +2,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.html" style="font-size: 25px;"><b>Ges</b>tru</a>
+        <a class="navbar-brand" href="index.php" style="font-size: 25px;"><b>Ges</b>tru</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

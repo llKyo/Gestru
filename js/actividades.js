@@ -343,6 +343,8 @@ function buscarFase() {
                 <td>${doc.data().fechaInicio}</td>
                 <td>${doc.data().fechaTermmino}</td>
                 <td>${doc.data().trabajador}</td>
+                <td> <span class="badge badge-success">${doc.data().estado}</span></td>
+
                 <td class="project-actions text-center">
                     <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt" ></i>Editar</a>
                     <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>

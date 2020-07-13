@@ -402,20 +402,56 @@ function buscarObra() {
         querySnapshot.forEach((doc) => {
             //const id = doc.id;
             if (obra == doc.data().obra) {
-                const id = doc.id;
-                table.innerHTML += `
+                let id = doc.id;
+                let completado = 0;
+                let act = 0;
+                let actividadesRef = db.collection('actividades').where('cronograma', '==', id);
+                actividadesRef.get()
+                    .then(snapshot => {
+                        snapshot.forEach(doc => {
+                            act += 1;
+                            if (doc.data().estado == "Terminado") {
+                                completado += 1;
+                            }
+                        });
+                    })
+                    .catch(err => {
+                        console.log('Error getting documents', err);
+                    });
+
+                setTimeout(() => {
+                    let progreso;
+                    if (act != 0) {
+                        progreso = Math.trunc(completado * 100 / act);
+                    } else {
+                        progreso = 0;
+                    }
+                    console.log(progreso);
+                    select = document.querySelector("#selectEstado");
+                    table.innerHTML += `
                 <tr>
                 <td>${doc.data().nombre}</td>
                 <td>${doc.data().fechaInicio}</td>
                 <td>${doc.data().fechaTermmino}</td>
-                <td>${doc.data().estado}</td>
+                <td class="project_progress">
+                    <div class="progress progress-sm">
+                        <div class="progress-bar bg-green" role="progressbar" aria-valuenow="${progreso}" aria-valuemin="0" aria-valuemax="100" style="width: ${progreso}%">
+                        </div>
+                    </div>
+                    <small>
+                        ${progreso}% Completado
+                    </small>
+                </td>
+                <td class="project-state text-center">
+                    <span class="badge badge-success">${progreso == 100 ? "Terminado" : "En ejecución"}</span>
+                </td>
                 <td class="project-actions text-center">
-                    <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
-                    <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
+                <a class="btn btn-info btn-md text-white" data-toggle="modal" data-target="#modal-edit" id="modalEdit" onclick=actualizarModal('${id}')><i class="fas fa-pencil-alt"></i>Editar</a>
+                <a class="btn btn-danger btn-md text-white" data-toggle="modal" data-target="#modal-delete" onclick="addIdModalEliminar('${id}')"><i class="fas fa-trash"></i>Eliminar</a>
                 </td>
                 </tr>`
+                }, 500);
             }
-
         })
     });
 }
